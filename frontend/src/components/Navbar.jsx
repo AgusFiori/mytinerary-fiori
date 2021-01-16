@@ -42,7 +42,7 @@ const Navbar = () => {
                 alt="logo"
                 height="100px"
               />
-              Welcome, <span>Guest</span>!
+              Welcome, <span>Guest</span> !
             </div>
             <div className="links">
               <NavLink to="/">
