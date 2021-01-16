@@ -1,0 +1,135 @@
+html * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+button.shadow {
+  box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.5) !important;
+}
+
+.slider {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 0 3rem;
+}
+
+footer {
+  background-color: #171738;
+  color: white;
+}
+
+a {
+  color: violet !important;
+}
+
+a:hover {
+  color: pink !important;
+}
+
+.bm-menu-wrap {
+  width: 250px !important;
+}
+
+p.titulo {
+  cursor: default;
+}
+
+.socialMedia {
+  display: flex;
+  justify-content: space-around;
+  font-size: 32px;
+  padding: 0.5rem 0;
+}
+
+.socialMedia > * {
+  cursor: pointer;
+}
+
+.socialMedia > *:hover {
+  color: purple;
+}
+
+.socialMediaTitle {
+  display: flex;
+  justify-content: center;
+}
+
+.links {
+  display: flex;
+  width: 12rem;
+  justify-content: space-around;
+  margin-right: 3rem;
+  align-items: center;
+}
+
+.logoC {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.logoGreet {
+  display: flex;
+  align-items: center;
+}
+
+.linkHome,
+.linkCities {
+  color: black;
+}
+
+.linkHome:hover,
+.linkCities:hover {
+  color: firebrick;
+}
+
+.linkHome,
+.linkCities {
+  transition: 0.2s ease;
+}
+
+.links > a:hover {
+  text-decoration: none;
+}
+
+.bm-menu-wrap {
+  display: none;
+}
+.bm-burger-button {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .slider {
+    grid-template-columns: 1fr;
+  }
+  .monigotes {
+    display: none;
+  }
+  span {
+    text-align: center;
+  }
+  .headerLogo {
+    height: 3rem !important;
+  }
+  .bm-menu-wrap {
+    width: 100vw !important;
+  }
+  .optionMenu {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .bm-menu-wrap {
+    display: initial;
+  }
+  .bm-burger-button {
+    display: initial;
+  }
+  .links {
+    display: none;
+  }
+}
