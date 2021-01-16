@@ -1,11 +1,6 @@
 import React from "react";
+import { Carousel, CarouselItem, CarouselControl } from "reactstrap";
 import Slides from "./Slides.jsx";
-import {
-  Carousel,
-  CarouselItem,
-  CarouselControl,
-  CarouselIndicators,
-} from "reactstrap";
 import "../styles/carousel.css";
 
 const items = [
@@ -36,11 +31,6 @@ const Carrusel = (props) => {
     setActiveIndex(nextIndex);
   };
 
-  const goToIndex = (newIndex) => {
-    if (animating) return;
-    setActiveIndex(newIndex);
-  };
-
   const slides = items.map((item) => {
     return (
       <CarouselItem
@@ -57,11 +47,6 @@ const Carrusel = (props) => {
 
   return (
     <Carousel activeIndex={activeIndex} next={next} previous={previous}>
-      <CarouselIndicators
-        items={items}
-        activeIndex={activeIndex}
-        onClickHandler={goToIndex}
-      />
       {slides}
       <CarouselControl
         direction="prev"

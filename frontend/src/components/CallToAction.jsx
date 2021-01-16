@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { FaSearch } from "react-icons/fa";
 import { Button } from "reactstrap";
+import { Link } from "react-router-dom";
 
 const Call = styled.div`
   background-color: #c9f2e3;
@@ -76,7 +76,7 @@ export const CallToAction = () => {
           <span>Make the most out of your day</span>
           <div className="inputCity">
             <Button color="primary" className="shadow" size="lg" block>
-              Browse itineraries
+              <Link to="/cities">Browse itineraries</Link>
             </Button>
           </div>
         </div>

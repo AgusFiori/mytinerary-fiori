@@ -46,10 +46,10 @@ const Navbar = () => {
             </div>
             <div className="links">
               <NavLink to="/">
-                <span className="linkHome">Home</span>
+                <span className="link">Home</span>
               </NavLink>
               <NavLink to="/cities">
-                <span className="linkCities">Cities</span>
+                <span className="link">Cities</span>
               </NavLink>
             </div>
           </span>

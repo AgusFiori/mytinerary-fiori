@@ -9,10 +9,22 @@ button.shadow {
   box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.5) !important;
 }
 
+.shadow > a {
+  color: white !important;
+}
+
+.shadow > a:hover {
+  text-decoration: none;
+}
+
 .slider {
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin: 0 3rem;
+}
+
+div.app {
+  border: 3px solid red !important;
 }
 
 footer {
@@ -74,21 +86,19 @@ p.titulo {
 .logoGreet {
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
-.linkHome,
-.linkCities {
-  color: black;
-}
-
-.linkHome:hover,
-.linkCities:hover {
-  color: firebrick;
-}
-
-.linkHome,
-.linkCities {
+.link {
+  color: royalblue;
   transition: 0.2s ease;
+  padding: 0 1rem;
+  overflow: visible;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.404);
+}
+
+.link:hover {
+  color: rgb(35, 65, 156);
 }
 
 .links > a:hover {
@@ -101,8 +111,16 @@ p.titulo {
 .bm-burger-button {
   display: none;
 }
-
 @media (max-width: 700px) {
+  .logo {
+    padding: 0.3rem 0 !important;
+  }
+  .logoGreet {
+    font-size: 24px;
+  }
+  .logoGreet > img {
+    height: 3rem;
+  }
   .slider {
     grid-template-columns: 1fr;
   }
@@ -128,8 +146,13 @@ p.titulo {
   }
   .bm-burger-button {
     display: initial;
+    position: absolute;
+    top: 14px !important;
   }
   .links {
     display: none;
+  }
+  .menu-item {
+    margin-left: 3rem;
   }
 }

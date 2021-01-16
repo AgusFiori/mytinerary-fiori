@@ -7,10 +7,10 @@ class Slides extends React.Component {
       return (
         <>
           <div
-            className="display"
+            className="slideImg"
             style={{ backgroundImage: `url(${citySlide})` }}
           >
-            <p key={city} className="titulo">
+            <p key={city} className="tituloSlide">
               {city.replace(/-/g, " ")}
             </p>
           </div>

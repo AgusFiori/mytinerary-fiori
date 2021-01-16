@@ -7,8 +7,8 @@ import {
   FaGithub,
   FaGooglePlusG,
   FaWhatsapp,
-  FaHeart,
 } from "react-icons/fa";
+import { NavLink } from "react-router-dom";
 
 const FooterPage = () => {
   return (
@@ -26,10 +26,10 @@ const FooterPage = () => {
             <h5 className="title">Links</h5>
             <ul>
               <li className="list-unstyled">
-                <a href="#!">Log in</a>
+                <NavLink to="/login">Log in</NavLink>
               </li>
               <li className="list-unstyled">
-                <a href="#!">Cities</a>
+                <NavLink to="/cities">Cities</NavLink>
               </li>
             </ul>
           </MDBCol>
