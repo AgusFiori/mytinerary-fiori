@@ -7,14 +7,12 @@ html * {
 
 button.shadow {
   box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.5) !important;
+  width: 100% !important;
 }
 
-.shadow > a {
-  color: white !important;
-}
-
-.shadow > a:hover {
-  text-decoration: none;
+.inputCity > a {
+  width: 100%;
+  text-decoration: none !important;
 }
 
 .slider {

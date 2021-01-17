@@ -75,9 +75,11 @@ export const CallToAction = () => {
         <div className="searchBar">
           <span>Make the most out of your day</span>
           <div className="inputCity">
-            <Button color="primary" className="shadow" size="lg" block>
-              <Link to="/cities">Browse itineraries</Link>
-            </Button>
+            <Link to="/cities">
+              <Button color="primary" className="shadow" size="lg" block>
+                Browse itineraries
+              </Button>
+            </Link>
           </div>
         </div>
 
