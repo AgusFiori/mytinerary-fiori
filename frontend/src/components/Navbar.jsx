@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import BurgerMenu from "./BurgerMenu.jsx";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Nav = styled.nav`
   padding: 0 0 0.3rem 0;
