@@ -6,6 +6,7 @@
     "@testing-library/jest-dom": "^5.11.8",
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.0",
+    "axios": "^0.21.1",
     "bootstrap": "^4.5.3",
     "mdbreact": "^5.0.1",
     "react": "^17.0.1",
@@ -20,6 +21,7 @@
     "reactstrap": "^8.8.1",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.2.1",
+    "uuid": "^8.3.2",
     "web-vitals": "^0.2.4"
   },
   "scripts": {

@@ -1,0 +1,80 @@
+.citiesContainer {
+  width: 90%;
+  cursor: pointer;
+  transition: 0.2s ease;
+  border-radius: 30px;
+}
+
+.cityImage {
+  border-radius: 25px;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  transition: 1s ease;
+  -webkit-transition: 1s ease;
+  background-repeat: no-repeat;
+}
+
+.cityImage:hover {
+  background-position: top;
+  transition: 0.3s ease;
+  -webkit-transition: 15s ease;
+}
+
+.card {
+  margin: 1rem 2rem 5rem 2rem;
+  height: 22rem;
+  border-radius: 30px !important;
+  border: 1px solid black !important;
+  transition: 0.2s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.cityName {
+  color: black;
+  height: 20%;
+  padding: 0.3rem;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  backdrop-filter: blur(3px);
+  background-color: rgba(255, 255, 255, 0.5);
+  align-items: center;
+  font-size: 32px;
+  font-family: "Pacifico", cursive;
+}
+
+.cities {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+h1 {
+  margin-top: 2rem !important;
+}
+
+.filter {
+  width: 90%;
+  padding: 2rem;
+}
+
+input {
+  width: 100%;
+  outline: none;
+  border: none;
+  border-bottom: 2px solid black;
+  font-size: 12px;
+  padding: 0.3rem;
+}
+
+a:hover {
+  text-decoration: none !important;
+}

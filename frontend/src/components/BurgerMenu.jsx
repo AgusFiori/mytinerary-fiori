@@ -1,6 +1,6 @@
 import React from "react";
 import { slide as Menu } from "react-burger-menu";
-import "../styles/BurgerMenu.css";
+import "../styles/burgerMenu.css";
 import {
   FaHome,
   FaInfoCircle,
@@ -22,44 +22,44 @@ class BurgerMenu extends React.Component {
           <h2>Menu</h2>
         </div>
         <NavLink to="/">
-          <p id="home" className="menu-item" href="/">
+          <div id="home" className="menu-item" href="/">
             <div className="iconMenu">
               <FaHome />
             </div>
             <div className="optionMenu">Home</div>
-          </p>
+          </div>
         </NavLink>
         <NavLink to="/cities">
-          <p id="cities" className="menu-item">
+          <div id="cities" className="menu-item">
             <div className="iconMenu">
               <FaCity />
             </div>
             <div className="optionMenu">Cities</div>
-          </p>
+          </div>
         </NavLink>
         <NavLink to="/about">
-          <p id="about" className="menu-item" href="/about">
+          <div id="about" className="menu-item" href="/about">
             <div className="iconMenu">
               <FaInfoCircle />
             </div>
             <div className="optionMenu">About</div>
-          </p>
+          </div>
         </NavLink>
         <NavLink to="/contact">
-          <p id="contact" className="menu-item">
+          <div id="contact" className="menu-item">
             <div className="iconMenu">
               <FaEnvelope />
             </div>
             <div className="optionMenu">Contact</div>
-          </p>
+          </div>
         </NavLink>
         <NavLink to="/login">
-          <p id="contact" className="menu-item">
+          <div id="contact" className="menu-item">
             <div className="iconMenu">
               <FaUserCircle />
             </div>
             <div className="optionMenu">Log In</div>
-          </p>
+          </div>
         </NavLink>
       </Menu>
     );
