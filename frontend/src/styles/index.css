@@ -1,3 +1,11 @@
+:root {
+  --headerColor: #593c8f;
+  --callColor: #9df7e5;
+  --mainColor: #f4e4ba;
+  --secondaryColor: #e5a9a9;
+  --footerColor: #171738;
+}
+
 html * {
   margin: 0;
   padding: 0;
