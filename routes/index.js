@@ -1,7 +1,9 @@
-const { Router } = require("express");
 const express = require("express");
-const router = express.Router;
+const router = express.Router();
+const cityController = require("../controllers/cityController");
 
-Router.route("/cities").get("hace algo").post("hace otra cosa");
+router.route("/cities").get(cityController.allCities);
 
-Router.route("/city/:id").get("hace algo");
+router.route("/city/:id").get(cityController.singleCity);
+
+module.exports = router;

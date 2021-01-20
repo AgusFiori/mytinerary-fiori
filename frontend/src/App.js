@@ -14,7 +14,7 @@ export default function App() {
         <Switch>
           <Route exact path="/" component={Section} />
           <Route exact path="/cities" component={Cities} />
-          <Route path="/city/:city" component={City} />
+          <Route path="/city/:id" component={City} />
           <Redirect to="/"></Redirect>
         </Switch>
         <FooterPage />

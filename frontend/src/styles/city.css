@@ -1,15 +1,189 @@
 .cityContainer {
-  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.cityHeader {
+  width: 100%;
+  height: 66vh;
+}
+
+.hero {
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  font-size: 64px;
+  font-family: "Pacifico", cursive;
+  align-items: center;
+  display: flex;
+}
+
+.hero > span {
+  padding: 0.3rem;
+  width: 100%;
+  backdrop-filter: blur(3px);
+  background-color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  justify-content: center;
+}
+
+h3 {
+  font-family: "Pacifico", cursive;
+  font-size: 48px !important;
+}
+
+.cityImgContainer > img {
+  height: 30rem;
+}
+
+.infoContainer {
+  border: 2px solid black;
+  border-radius: 15px;
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+li {
+  list-style: none;
+  margin: 0.6rem 0;
+}
+
+.country,
+.ffacts {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-h1 {
+.countryName {
+  margin: 1rem 0 2rem 0;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
   font-family: "Pacifico", cursive;
-  font-size: 64px;
+  width: 12vw;
+  height: 9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.5);
+  font-size: 2vw;
+  letter-spacing: 0.2rem;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: white;
+  border: 1px solid black;
+  border-radius: 12px;
 }
 
-.cityImgContainer > img {
-  height: 30rem;
+.ffacts > ul {
+  font-size: 18px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.belowImage {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
+.itineraryContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.noItineraries {
+  background-image: url(../images/30494969-travel-background-pattern.jpg);
+  background-size: cover;
+  background-position: center;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  display: flex;
+  height: 17rem;
+  width: 75%;
+  border-radius: 22px;
+  margin: 3rem 0;
+}
+
+.message {
+  background-color: white;
+  padding: 1rem 0;
+  width: 100%;
+}
+
+.return {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3rem 0rem 0 0rem;
+  width: 100%;
+}
+
+.backBtn {
+  padding: 1rem !important;
+}
+
+.return > a {
+  width: 100%;
+  margin: 0 5rem;
+}
+
+@media only screen and (max-width: 1200px) {
+  .cityContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .infoContainer {
+    border-bottom: 3px solid black;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 1rem;
+    margin: 3rem 0;
+  }
+  .country {
+    width: 100%;
+  }
+  .countryName {
+    margin: 1rem 0 2rem 0;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: "Pacifico", cursive;
+    width: 100%;
+    height: 12rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.5);
+    font-size: 8vw;
+    letter-spacing: 0.4rem;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: white;
+    border: 1px solid black;
+    border-radius: 12px;
+  }
+  .belowImage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .noItineraries {
+    height: 22rem;
+  }
 }

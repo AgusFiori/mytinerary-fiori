@@ -6,7 +6,7 @@
 }
 
 .cityImage {
-  border-radius: 25px;
+  border-radius: 30px;
   height: 100%;
   background-position: center;
   background-size: cover;
@@ -25,9 +25,8 @@
 
 .card {
   margin: 1rem 2rem 5rem 2rem;
-  height: 22rem;
+  height: 27rem;
   border-radius: 30px !important;
-  border: 1px solid black !important;
   transition: 0.2s ease;
 }
 
@@ -38,7 +37,7 @@
 .cityName {
   color: black;
   height: 20%;
-  padding: 0.3rem;
+  padding: 2.5rem;
   width: 100%;
   text-align: center;
   display: flex;
@@ -46,7 +45,7 @@
   backdrop-filter: blur(3px);
   background-color: rgba(255, 255, 255, 0.5);
   align-items: center;
-  font-size: 32px;
+  font-size: 42px;
   font-family: "Pacifico", cursive;
 }
 
@@ -58,7 +57,8 @@
 }
 
 h1 {
-  margin-top: 2rem !important;
+  padding: 2rem 0 1rem 0;
+  font-size: 64px !important;
 }
 
 .filter {

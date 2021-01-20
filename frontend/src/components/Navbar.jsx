@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import BurgerMenu from "./BurgerMenu.jsx";
 import { NavLink } from "react-router-dom";
+import "../styles/header.css";
 
 const Nav = styled.nav`
   padding: 0 0 0.3rem 0;
@@ -31,28 +32,30 @@ const Nav = styled.nav`
 const Navbar = () => {
   return (
     <Nav>
-      <BurgerMenu />
-      <div className="logo">
-        <div className="logoC">
-          <span id="greeting" className="greeting">
-            <div className="logoGreet">
-              <img
-                className="userIcon"
-                src="./user-icon-male.jpg"
-                alt="logo"
-                height="100px"
-              />
-              Welcome, <span>Guest</span> !
-            </div>
-            <div className="links">
-              <NavLink to="/">
-                <span className="link">Home</span>
-              </NavLink>
-              <NavLink to="/cities">
-                <span className="link">Cities</span>
-              </NavLink>
-            </div>
-          </span>
+      <div className="ost-multi-header">
+        <BurgerMenu />
+        <div className="logo">
+          <div className="logoC">
+            <span id="greeting" className="greeting">
+              <div className="logoGreet">
+                <img
+                  className="userIcon"
+                  src="./user-icon-male.jpg"
+                  alt="logo"
+                  height="100px"
+                />
+                Welcome, <span>Guest</span> !
+              </div>
+              <div className="links">
+                <NavLink to="/">
+                  <span className="link">Home</span>
+                </NavLink>
+                <NavLink to="/cities">
+                  <span className="link">Cities</span>
+                </NavLink>
+              </div>
+            </span>
+          </div>
         </div>
       </div>
     </Nav>
