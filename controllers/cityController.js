@@ -55,14 +55,11 @@ const data = [
     flagUrl:
       "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Flag_of_Argentina.svg/1200px-Flag_of_Argentina.svg.png",
   },
-]; // esto vuela
+];
 
 const cityController = {
   allCities: (req, res) => {
     // Devolver al FRONTEND todas las ciudades
-
-    // pedirle a la BASE DE DATOS todas las ciudades disponibles
-    // en una variable llamada DATA
     res.json({
       respuesta: data,
     });
