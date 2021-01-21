@@ -22,11 +22,15 @@ const cityController = {
 
   allCities: async (req, res) => {
     const data = await City.find();
+    try {
+      res.json({
+        respuesta: data,
+      });
+    } catch (error) {
+      console.log("error");
+    }
 
     // Devolver al FRONTEND todas las ciudades
-    res.json({
-      respuesta: data,
-    });
   },
 
   singleCity: async (req, res) => {

@@ -3,6 +3,7 @@ const cors = require("cors");
 const app = express(); // app es la aplicacion
 const router = require("./routes/index");
 require("./config/database");
+require("dotenv").config(); // para variables de entorno
 
 // MIDDLEWARE: funcion que se ejecuta antes de llegar a la ruta
 app.use(cors());

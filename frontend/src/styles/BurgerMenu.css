@@ -127,3 +127,7 @@ p {
 .iconMenu {
   display: flex;
 }
+
+a {
+  color: black !important;
+}
