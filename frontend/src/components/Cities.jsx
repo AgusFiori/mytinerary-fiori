@@ -34,39 +34,68 @@ const Cities = () => {
     setFilteredCities(filtered);
   }
 
-  return (
-    <div className="cities">
-      <h1>Cities</h1>
-      <h2 className="filter">
-        <input
-          type="text"
-          placeholder="Search cities..."
-          name="filter"
-          id="filter"
-          onChange={filter}
-          autoComplete="off"
-        />
-      </h2>
-      <div className="citiesContainer">
-        {filteredCities.map(({ cityName, cityPic, _id }) => {
-          return (
-            <Link to={`/city/${_id}`} key={uuidv4()}>
-              <div className="card">
-                <div
-                  className="cityImage"
-                  style={{
-                    backgroundImage: `url(${cityPic})`,
-                  }}
-                >
-                  <div className="cityName">{cityName}</div>
+  // console.log(filteredCities);
+
+  if (filteredCities.length > 0) {
+    return (
+      <div className="cities">
+        <h1>Cities</h1>
+        <h2 className="filter">
+          <input
+            type="text"
+            placeholder="Search cities..."
+            name="filter"
+            id="filter"
+            onChange={filter}
+            autoComplete="off"
+          />
+        </h2>
+        <div className="citiesContainer">
+          {filteredCities.map(({ cityName, cityPic, _id }) => {
+            return (
+              <Link to={`/city/${_id}`} key={uuidv4()}>
+                <div className="card">
+                  <div
+                    className="cityImage"
+                    style={{
+                      backgroundImage: `url(${cityPic})`,
+                    }}
+                  >
+                    <div className="cityName">{cityName}</div>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          );
-        })}
+              </Link>
+            );
+          })}
+        </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div className="cities">
+        <h1>Cities</h1>
+        <h2 className="filter">
+          <input
+            type="text"
+            placeholder="Search cities..."
+            name="filter"
+            id="filter"
+            onChange={filter}
+            autoComplete="off"
+          />
+        </h2>
+        <div className="noCities">
+          <div className="noCitiesMsg">
+            <h5>
+              Looks like there are no itineraries for the city you're looking
+              for...
+            </h5>
+            <h6>Try another one !</h6>
+          </div>
+        </div>
+      </div>
+    );
+  }
 };
 
 export default Cities;
