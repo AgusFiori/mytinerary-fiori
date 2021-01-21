@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 
 const Cities = () => {
   const [cities, setCities] = useState([]);
+  const [filteredCities, setFilteredCities] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:4000/cities")
@@ -14,14 +15,40 @@ const Cities = () => {
       .then((data) => setCities(data.respuesta));
   }, []);
 
+  useEffect(() => {
+    if (document.getElementById("filter").value === "") {
+      setFilteredCities(
+        cities.sort((a, b) =>
+          a.cityName > b.cityName ? 1 : b.cityName > a.cityName ? -1 : 0
+        )
+      );
+    }
+  }, [cities]);
+
+  function filter(e) {
+    let input = e.target.value.trim();
+    const filtered = cities.filter(
+      (cities) =>
+        cities.cityName.toLowerCase().indexOf(input.toLowerCase()) === 0
+    );
+    setFilteredCities(filtered);
+  }
+
   return (
     <div className="cities">
       <h1>Cities</h1>
       <h2 className="filter">
-        <input type="text" placeholder="Search cities..." />
+        <input
+          type="text"
+          placeholder="Search cities..."
+          name="filter"
+          id="filter"
+          onChange={filter}
+          autoComplete="off"
+        />
       </h2>
       <div className="citiesContainer">
-        {cities.map(({ cityName, cityPic, _id }) => {
+        {filteredCities.map(({ cityName, cityPic, _id }) => {
           return (
             <Link to={`/city/${_id}`} key={uuidv4()}>
               <div className="card">

@@ -6,11 +6,11 @@ import { Link } from "react-router-dom";
 const City = (props) => {
   const [city, setCity] = useState({});
   useEffect(() => {
-    const id = parseInt(props.match.params.id);
+    const id = props.match.params.id;
     fetch(`http://localhost:4000/city/${id}`)
       .then((respuesta) => respuesta.json())
       .then((data) => setCity(data.respuesta));
-  }, []);
+  }, [props.match.params.id]);
   return (
     <div className="cityContainer">
       <div className="cityHeader">

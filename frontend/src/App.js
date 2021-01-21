@@ -13,7 +13,7 @@ export default function App() {
         <Navbar />
         <Switch>
           <Route exact path="/" component={Section} />
-          <Route exact path="/cities" component={Cities} />
+          <Route path="/cities" component={Cities} />
           <Route path="/city/:id" component={City} />
           <Redirect to="/"></Redirect>
         </Switch>

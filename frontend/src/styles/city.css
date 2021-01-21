@@ -114,6 +114,7 @@ li {
   width: 75%;
   border-radius: 22px;
   margin: 3rem 0;
+  border: 1px solid #88dfd7;
 }
 
 .message {
