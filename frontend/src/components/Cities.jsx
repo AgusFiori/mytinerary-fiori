@@ -48,7 +48,7 @@ const Cities = () => {
     setFilteredCities(filtered);
   }
 
-  if (filteredCities.length > 0) {
+  if (filteredCities.length > 0 && loading === true) {
     return (
       <div className="cities">
         <h1>Cities</h1>
@@ -82,7 +82,7 @@ const Cities = () => {
         </div>
       </div>
     );
-  } else {
+  } else if (loading === false) {
     return (
       <div className="cities">
         <h1>Cities</h1>
@@ -97,6 +97,22 @@ const Cities = () => {
           />
         </h2>
         <Loading />
+      </div>
+    );
+  } else if (filteredCities.length === 0) {
+    return (
+      <div className="cities">
+        <h1>Cities</h1>
+        <h2 className="filter">
+          <input
+            type="text"
+            placeholder="Search cities..."
+            name="filter"
+            id="filter"
+            onChange={filter}
+            autoComplete="off"
+          />
+        </h2>
         <div className="noCities">
           <div className="noCitiesMsg">
             <h5>

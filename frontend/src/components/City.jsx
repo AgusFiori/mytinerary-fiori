@@ -72,7 +72,7 @@ const City = (props) => {
       <div className="return">
         <Link to="/cities">
           <Button color="primary" size="lg" block className="backBtn">
-            Looking for other cities? Click Here!
+            Looking for another city? Click Here!
           </Button>
         </Link>
       </div>
