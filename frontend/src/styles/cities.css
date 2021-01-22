@@ -139,4 +139,7 @@ h6 {
     font-size: 32px;
     padding: 1rem;
   }
+  input::placeholder {
+    font-size: 32px;
+  }
 }
