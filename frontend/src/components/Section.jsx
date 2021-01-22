@@ -7,7 +7,7 @@ import "../styles/carousel.css";
 const SectionContainer = styled.section`
   header {
     height: 30rem;
-    background-image: url("./arc-de-triomph.jpg");
+    background-image: url("./images/homepage/arc-de-triomph.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     display: flex;
@@ -59,7 +59,7 @@ export const Section = () => {
         <div className="imgContainer">
           <img
             className="headerLogo"
-            src="./MyTinerary-Logo-c.png"
+            src="./images/homepage/MyTinerary-Logo-c.png"
             alt="logo"
           />
         </div>
