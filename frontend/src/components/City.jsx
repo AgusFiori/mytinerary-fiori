@@ -5,12 +5,28 @@ import { Link } from "react-router-dom";
 
 const City = (props) => {
   const [city, setCity] = useState({});
+
   useEffect(() => {
     const id = props.match.params.id;
     fetch(`http://localhost:4000/city/${id}`)
       .then((respuesta) => respuesta.json())
-      .then((data) => setCity(data.respuesta));
+      .then((data) => {
+        if (data.success === true) {
+          setCity(data.respuesta);
+        } else {
+          alert("Something went wrong! 🙁");
+          window.location.pathname = "/cities";
+        }
+      })
+      .catch(() => {
+        console.log("error al cargar");
+      });
   }, [props.match.params.id]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="cityContainer">
       <div className="cityHeader">

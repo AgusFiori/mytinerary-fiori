@@ -2,6 +2,7 @@ const City = require("../models/City");
 
 const cityController = {
   addCity: (req, res) => {
+    // añadir ciudad
     const { cityName, cityPic, country, facts, flagUrl } = req.body;
     const newCity = new City({
       cityName: cityName,
@@ -21,28 +22,34 @@ const cityController = {
   },
 
   allCities: async (req, res) => {
-    const data = await City.find();
+    // Devolver al FRONTEND todas las ciudades
     try {
+      const data = await City.find();
       res.json({
         respuesta: data,
       });
     } catch (error) {
       console.log("error");
     }
-
-    // Devolver al FRONTEND todas las ciudades
   },
 
   singleCity: async (req, res) => {
-    //devolver al FRONTEND solo las ciudades que necesito
+    //devolver al FRONTEND solo las ciudades que necesito x ID
 
     const id = req.params.id;
 
-    const data = await City.findById(id);
-
-    res.json({
-      respuesta: data,
-    });
+    try {
+      const data = await City.findById(id);
+      res.json({
+        success: true,
+        respuesta: data,
+      });
+    } catch {
+      res.json({
+        success: false,
+        respuesta: "Error loading cities",
+      });
+    }
   },
 };
 

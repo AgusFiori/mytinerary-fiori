@@ -3,12 +3,14 @@ import "../styles/cities.css";
 import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Link } from "react-router-dom";
+import { Loading } from "./Loader.jsx";
 // import { Lines } from "react-preloaders";
 // import axios from 'axios';
 
 const Cities = () => {
   const [cities, setCities] = useState([]);
   const [filteredCities, setFilteredCities] = useState([]);
+  const [loading, setLoading] = useState(false);
   // const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -16,11 +18,11 @@ const Cities = () => {
       .then((respuesta) => respuesta.json())
       .then((data) => {
         setCities(data.respuesta);
-        // setLoading(false);
+        setLoading(true);
+      })
+      .catch((err) => {
+        console.log("error");
       });
-    // .catch((err) => {
-    //   setLoading(false);
-    // });
   }, []);
 
   useEffect(() => {
@@ -33,6 +35,10 @@ const Cities = () => {
     }
   }, [cities]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   function filter(e) {
     let input = e.target.value.trim();
     const filtered = cities.filter(
@@ -44,39 +50,37 @@ const Cities = () => {
 
   if (filteredCities.length > 0) {
     return (
-      <>
-        <div className="cities">
-          <h1>Cities</h1>
-          <h2 className="filter">
-            <input
-              type="text"
-              placeholder="Search cities..."
-              name="filter"
-              id="filter"
-              onChange={filter}
-              autoComplete="off"
-            />
-          </h2>
-          <div className="citiesContainer">
-            {filteredCities.map(({ cityName, cityPic, _id }) => {
-              return (
-                <Link to={`/city/${_id}`} key={uuidv4()}>
-                  <div className="card">
-                    <div
-                      className="cityImage"
-                      style={{
-                        backgroundImage: `url(${cityPic})`,
-                      }}
-                    >
-                      <div className="cityName">{cityName}</div>
-                    </div>
+      <div className="cities">
+        <h1>Cities</h1>
+        <h2 className="filter">
+          <input
+            type="text"
+            placeholder="Search cities..."
+            name="filter"
+            id="filter"
+            onChange={filter}
+            autoComplete="off"
+          />
+        </h2>
+        <div className="citiesContainer">
+          {filteredCities.map(({ cityName, cityPic, _id }) => {
+            return (
+              <Link to={`/city/${_id}`} key={uuidv4()}>
+                <div className="card">
+                  <div
+                    className="cityImage"
+                    style={{
+                      backgroundImage: `url(${cityPic})`,
+                    }}
+                  >
+                    <div className="cityName">{cityName}</div>
                   </div>
-                </Link>
-              );
-            })}
-          </div>
+                </div>
+              </Link>
+            );
+          })}
         </div>
-      </>
+      </div>
     );
   } else {
     return (
@@ -92,6 +96,7 @@ const Cities = () => {
             autoComplete="off"
           />
         </h2>
+        <Loading />
         <div className="noCities">
           <div className="noCitiesMsg">
             <h5>

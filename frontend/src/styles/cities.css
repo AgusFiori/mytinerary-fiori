@@ -58,8 +58,8 @@
 }
 
 h1 {
-  padding: 2rem 0 1rem 0;
-  font-size: 64px !important;
+  padding: 3rem 0 2rem 0;
+  font-size: 90px !important;
 }
 
 .filter {
@@ -74,6 +74,12 @@ input {
   border-bottom: 2px solid black;
   font-size: 12px;
   padding: 0.3rem;
+  text-align: center;
+}
+
+input::placeholder {
+  text-align: center;
+  font-size: 48px;
 }
 
 a:hover {
@@ -115,4 +121,22 @@ h6 {
 
 .noCitiesMsg > h6 {
   padding-top: 0;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 700px) {
+  .card {
+    margin: 1rem 0.3rem 1rem 0.3rem;
+    height: 15rem;
+    border-radius: 30px !important;
+    transition: 0.2s ease;
+  }
+  .cityName {
+    font-size: 32px;
+    padding: 1rem;
+  }
 }
