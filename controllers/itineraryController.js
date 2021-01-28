@@ -18,27 +18,56 @@ const itineraryController = {
       comments,
     } = req.body;
     const newItinerary = new Itinerary({
-      cityId: cityId,
-      title: title,
-      authorPic: authorPic,
-      authorName: authorName,
-      likes: likes,
-      duration: duration,
-      budget: budget,
-      hashtags: hashtags,
-      date: date,
-      accesibility: accesibility,
-      activities: activities,
-      comments: comments,
+      cityId,
+      title,
+      authorPic,
+      authorName,
+      likes,
+      duration,
+      budget,
+      hashtags,
+      date,
+      accesibility,
+      activities,
+      comments,
     });
     newItinerary
       .save()
-      .then((newItinerary) => {
-        return res.json({ success: true, respuesta: newItinerary });
+      .then(async (newItinerary) => {
+        const populatedItinerary = await newItinerary
+          .populate("cityId")
+          .execPopulate();
+        res.json({ success: true, respuesta: populatedItinerary });
       })
       .catch((error) => {
-        return res.json({ success: false, error: error });
+        res.json({ success: false, error: error });
       });
+  },
+  allItineraries: async (req, res) => {
+    try {
+      const data = await Itinerary.find();
+      res.json({
+        success: true,
+        respuesta: data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  findItineraryById: async (req, res) => {
+    try {
+      const { id } = req.params;
+      Itinerary.find({ cityId: id })
+        .populate("cityId")
+        .then((city) =>
+          res.json({
+            success: true,
+            respuesta: city,
+          })
+        );
+    } catch (error) {
+      console.log(error);
+    }
   },
 };
 

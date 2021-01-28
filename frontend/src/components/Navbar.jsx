@@ -40,7 +40,7 @@ const Navbar = () => {
               <div className="logoGreet">
                 <img
                   className="userIcon"
-                  src="./images/homepage/user-icon-male.jpg"
+                  src="./images/user-icon-male.jpg"
                   alt="logo"
                   height="100px"
                 />

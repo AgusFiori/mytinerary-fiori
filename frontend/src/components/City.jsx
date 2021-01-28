@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import "../styles/city.css";
 import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
+import { Itinerary } from "./Itinerary";
 
 const City = (props) => {
   const [city, setCity] = useState({});
+  const [itineraries, setItineraries] = useState([]);
+  const id = props.match.params.id;
 
   useEffect(() => {
-    const id = props.match.params.id;
     fetch(`http://localhost:4000/city/${id}`)
       .then((respuesta) => respuesta.json())
       .then((data) => {
@@ -21,7 +23,22 @@ const City = (props) => {
       .catch(() => {
         console.log("error al cargar");
       });
-  }, [props.match.params.id]);
+  }, [id]);
+
+  useEffect(() => {
+    fetch(`http://localhost:4000/itineraries/${id}`)
+      .then((respuesta) => respuesta.json())
+      .then((data) => {
+        if (data.success === true) {
+          setItineraries(data.respuesta);
+        }
+      })
+      .catch(() => {
+        console.log("error al cargar");
+      });
+  }, [id]);
+
+  console.log(itineraries);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -62,11 +79,9 @@ const City = (props) => {
           </div>
         </div>
         <div className="itineraryContainer">
-          <div className="noItineraries">
-            <div className="message">
-              <h2>No itineraries yet - be the first to make one !</h2>
-            </div>
-          </div>
+          {itineraries.map((itinerary) => (
+            <Itinerary itinerary={itinerary} />
+          ))}
         </div>
       </div>
       <div className="return">

@@ -4,15 +4,15 @@ import "./styles/index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { createStore } from "redux";
-import { Provider } from "react-redux";
+// import { createStore } from "redux";
+// import { Provider } from "react-redux";
 
-const miStore = createStore();
+// const miStore = createStore();
 
 ReactDOM.render(
-  <Provider>
-    <App />
-  </Provider>,
+  // <Provider store={miStore}
+  <App />,
+  // </Provider>
   document.getElementById("root")
 );
 
