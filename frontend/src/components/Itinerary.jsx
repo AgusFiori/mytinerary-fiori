@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import "../styles/itinerary.css";
 import { Comment } from "./Comment.jsx";
+import { Activity } from "./Activity.jsx";
 import { RiWheelchairFill, RiWheelchairLine } from "react-icons/ri";
 import { HiCash } from "react-icons/hi";
+import { v4 as uuidv4 } from "uuid";
+import { AiOutlineHeart, AiOutlineSend } from "react-icons/ai";
 
 export const Itinerary = ({ itinerary }) => {
   const [visible, setVisible] = useState(false);
@@ -10,7 +13,7 @@ export const Itinerary = ({ itinerary }) => {
   return (
     <div className="container">
       <div className="itinerary" key={itinerary._id}>
-        <div className="center">
+        <div className="itineraryTitle">
           <h3>{itinerary.title}</h3>
         </div>
         <div className="content">
@@ -20,9 +23,14 @@ export const Itinerary = ({ itinerary }) => {
           </div>
           <div className="info">
             <div className="ratings">
-              <span>{itinerary.likes} Likes</span>
-              <span>{itinerary.duration}h</span>
-              <span>{Array(itinerary.budget).fill(<HiCash />)}</span>
+              <span>
+                <AiOutlineHeart />
+                {" " + itinerary.likes}
+              </span>
+              <span>Duration: {itinerary.duration}h</span>
+              <span style={{ color: "green" }}>
+                {Array(itinerary.budget).fill(<HiCash />)}
+              </span>
               <span>
                 {itinerary.accesibility ? (
                   <RiWheelchairFill />
@@ -33,7 +41,11 @@ export const Itinerary = ({ itinerary }) => {
             </div>
             <div className="hashtags">
               {itinerary.hashtags.map((hashtag) => {
-                return <span>#{hashtag}</span>;
+                return (
+                  <span style={{ fontSize: "18px" }} key={uuidv4()}>
+                    #{hashtag}
+                  </span>
+                );
               })}
             </div>
           </div>
@@ -41,15 +53,25 @@ export const Itinerary = ({ itinerary }) => {
         <div className="commentsContainer">
           {visible && (
             <>
-              <div className="activities"></div>
+              <div className="activities">
+                {itinerary.activities.map((activity) => {
+                  return <Activity key={uuidv4()} activity={activity} />;
+                })}
+              </div>
               <div className="comments">
                 {itinerary.comments.map((comment) => {
-                  return <Comment comment={comment} />;
+                  return <Comment key={uuidv4()} comment={comment} />;
                 })}
+              </div>
+              <div className="commentInput">
+                <input type="text" />
+                <button className="ingresarComentario">
+                  <AiOutlineSend />
+                </button>
               </div>
             </>
           )}
-          <div className="center">
+          <div className="buttonContainer">
             <button onClick={() => setVisible(!visible)}>
               View {visible ? "Less" : "More"}
             </button>

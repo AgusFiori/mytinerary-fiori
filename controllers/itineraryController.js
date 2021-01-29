@@ -45,7 +45,7 @@ const itineraryController = {
   },
   allItineraries: async (req, res) => {
     try {
-      const data = await Itinerary.find();
+      const data = await Itinerary.find().populate("cityId");
       res.json({
         success: true,
         respuesta: data,

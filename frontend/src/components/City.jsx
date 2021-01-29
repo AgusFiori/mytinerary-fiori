@@ -3,6 +3,7 @@ import "../styles/city.css";
 import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Itinerary } from "./Itinerary";
+import { v4 as uuidv4 } from "uuid";
 
 const City = (props) => {
   const [city, setCity] = useState({});
@@ -38,8 +39,6 @@ const City = (props) => {
       });
   }, [id]);
 
-  console.log(itineraries);
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -73,15 +72,23 @@ const City = (props) => {
             <h3>Fun facts:</h3>
             <ul>
               {city.facts
-                ? city.facts.map((element) => <li key={element}>{element}</li>)
+                ? city.facts.map((element) => <li key={uuidv4()}>{element}</li>)
                 : ""}
             </ul>
           </div>
         </div>
         <div className="itineraryContainer">
-          {itineraries.map((itinerary) => (
-            <Itinerary itinerary={itinerary} />
-          ))}
+          {itineraries.length ? (
+            itineraries.map((itinerary) => {
+              return <Itinerary key={uuidv4()} itinerary={itinerary} />;
+            })
+          ) : (
+            <div className="noItineraries">
+              <div className="message">
+                <h2>No itineraries yet - be the first to make one !</h2>
+              </div>
+            </div>
+          )}
         </div>
       </div>
       <div className="return">

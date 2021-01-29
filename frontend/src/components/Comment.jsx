@@ -1,6 +1,13 @@
 import React from "react";
+import "../styles/comment.css";
 
 export const Comment = ({ comment }) => {
-  console.log(comment.comment);
-  return <div>{comment.comment}</div>;
+  return (
+    <div className="commentContainer">
+      <div className="avatar">
+        <img src={comment.avatar} alt="avatar" />
+      </div>
+      <div className="comment">{comment.comment}</div>
+    </div>
+  );
 };

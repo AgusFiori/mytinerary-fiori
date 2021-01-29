@@ -7,10 +7,9 @@ img {
 }
 
 .itinerary {
-  margin: 3rem 0;
-  padding: 1rem;
-  border: 1px solid black;
+  margin: 3rem 0 0 0;
   border-radius: 22px;
+  background-color: #9df7e5;
 }
 
 .content {
@@ -20,6 +19,18 @@ img {
 
 .content > * {
   width: 50%;
+}
+
+.itineraryTitle {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  width: 100%;
+  background-color: #78c0b3;
+  border-top-left-radius: 22px;
+  border-top-right-radius: 22px;
+  height: 5rem;
 }
 
 .author {
@@ -44,12 +55,40 @@ img {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  font-size: 24px;
+}
+
+.likes {
+  border: 2px solid red;
+  display: flex;
+  align-items: center;
+  width: 5rem;
+  justify-content: center;
+  height: 3rem;
+}
+
+.buttonContainer {
+  padding: 1rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 button {
-  padding: 0.3rem;
+  padding: 0.7rem 2rem;
+  font-size: 24px !important;
   border-radius: 12px !important;
   outline: none !important;
+  border: none;
+  box-shadow: 2px 2px rgb(0, 0, 0, 0.7);
+  background-color: #e5a9a9;
+  color: white;
+  font-weight: bolder;
+  transition: 0.2s ease;
+}
+
+button:hover {
+  background-color: #bb8181;
 }
 
 .hashtags {
@@ -60,4 +99,37 @@ button {
 
 .commentsContainer {
   margin-top: 1rem;
+}
+
+.activities {
+  display: flex;
+  margin: 3rem 0;
+  justify-content: space-around;
+}
+
+.commentInput {
+  display: flex;
+  padding: 0 5rem;
+}
+
+.commentInput > input {
+  border: none !important;
+  outline: none;
+  border-radius: 12px !important;
+  font-size: 24px;
+  text-align: left;
+  padding-left: 1rem;
+}
+
+.ingresarComentario {
+  font-size: 42px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 3rem;
+  margin: 0 1rem;
+  background-color: #e5a9a9;
+  color: white;
+  padding: 1.7rem 2rem;
 }
