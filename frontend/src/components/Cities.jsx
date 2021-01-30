@@ -15,6 +15,8 @@ const Cities = (props) => {
     window.scrollTo(0, 0);
   }, []);
 
+  console.log(props);
+
   return (
     <div className="cities">
       <h1>Cities</h1>

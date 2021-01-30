@@ -4,43 +4,50 @@ import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Itinerary } from "./Itinerary";
 import { v4 as uuidv4 } from "uuid";
+import { connect } from "react-redux";
+import itinerariesActions from "../redux/actions/itinerariesActions";
 
 const City = (props) => {
-  const [city, setCity] = useState({});
-  const [itineraries, setItineraries] = useState([]);
+  const [ciudad, setCiudad] = useState({});
   const id = props.match.params.id;
 
-  useEffect(() => {
-    fetch(`http://localhost:4000/city/${id}`)
-      .then((respuesta) => respuesta.json())
-      .then((data) => {
-        if (data.success === true) {
-          setCity(data.respuesta);
-        } else {
-          alert("Something went wrong! 🙁");
-          window.location.pathname = "/cities";
-        }
-      })
-      .catch(() => {
-        console.log("error al cargar");
-      });
-  }, [id]);
+  console.log(props);
+
+  // useEffect(() => {
+  // //   fetch(`http://localhost:4000/city/${id}`)
+  // //     .then((respuesta) => respuesta.json())
+  // //     .then((data) => {
+  // //       if (data.success === true) {
+  // //         setCity(data.respuesta);
+  // //       } else {
+  // //         alert("Something went wrong! 🙁");
+  // //         window.location.pathname = "/cities";
+  // //       }
+  // //     })
+  // //     .catch(() => {
+  // //       console.log("error al cargar");
+  // //     });
+  // }, [id]);
+
+  // useEffect(() => {
+  //   fetch(`http://localhost:4000/itineraries/${id}`)
+  //     .then((respuesta) => respuesta.json())
+  //     .then((data) => {
+  //       if (data.success === true) {
+  //         setItineraries(data.respuesta);
+  //       }
+  //     })
+  //     .catch(() => {
+  //       console.log("error al cargar");
+  //     });
+  // }, [id]);
 
   useEffect(() => {
-    fetch(`http://localhost:4000/itineraries/${id}`)
-      .then((respuesta) => respuesta.json())
-      .then((data) => {
-        if (data.success === true) {
-          setItineraries(data.respuesta);
-        }
-      })
-      .catch(() => {
-        console.log("error al cargar");
-      });
-  }, [id]);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
+    const ciudad = props.ciudad.filter((ciudad) => {
+      return ciudad._id === id;
+    });
+    setCiudad(ciudad[0]);
+    props.getItineraries(id);
   }, []);
 
   return (
@@ -49,10 +56,10 @@ const City = (props) => {
         <div
           className="hero"
           style={{
-            backgroundImage: `url(${city.cityPic})`,
+            backgroundImage: `url(${ciudad.cityPic})`,
           }}
         >
-          <span>{city.cityName}</span>
+          <span>{ciudad.cityName}</span>
         </div>
       </div>
       <div className="belowImage">
@@ -62,24 +69,26 @@ const City = (props) => {
             <span
               className="countryName"
               style={{
-                backgroundImage: `url(${city.flagUrl})`,
+                backgroundImage: `url(${ciudad.flagUrl})`,
               }}
             >
-              {city.country}
+              {ciudad.country}
             </span>
           </div>
           <div className="ffacts">
             <h3>Fun facts:</h3>
             <ul>
-              {city.facts
-                ? city.facts.map((element) => <li key={uuidv4()}>{element}</li>)
+              {ciudad.facts
+                ? ciudad.facts.map((element) => (
+                    <li key={uuidv4()}>{element}</li>
+                  ))
                 : ""}
             </ul>
           </div>
         </div>
         <div className="itineraryContainer">
-          {itineraries.length ? (
-            itineraries.map((itinerary) => {
+          {props.allItineraries.length ? (
+            props.allItineraries.map((itinerary) => {
               return <Itinerary key={uuidv4()} itinerary={itinerary} />;
             })
           ) : (
@@ -102,4 +111,15 @@ const City = (props) => {
   );
 };
 
-export default City;
+const mapStateToProps = (state) => {
+  return {
+    allItineraries: state.itineraryR.itineraries,
+    ciudad: state.cityR.cities,
+  };
+};
+
+const mapDispatchToProps = {
+  getItineraries: itinerariesActions.getItineraries,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(City);
