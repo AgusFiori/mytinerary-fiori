@@ -2,20 +2,22 @@ import React from "react";
 import "../styles/cities.css";
 import { useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { Link } from "react-router-dom";
 import { Loading } from "./Loader.jsx";
 import { connect } from "react-redux";
+import { CityCard } from "./CityCard";
 import citiesActions from "../redux/actions/citiesActions";
 
 const Cities = (props) => {
   // const [loading, setLoading] = useState(true);
 
+  console.log(props);
+
+  // const {getCities} = props
+
   useEffect(() => {
     props.getCities();
     window.scrollTo(0, 0);
   }, []);
-
-  console.log(props);
 
   return (
     <div className="cities">
@@ -33,27 +35,14 @@ const Cities = (props) => {
         />
       </h2>
       <div className="citiesContainer">
-        {props.filteredCities ? (
+        {props.allCities.length ? (
           props.filteredCities.length !== 0 ? (
             props.filteredCities
               .sort((a, b) =>
                 a.cityName > b.cityName ? 1 : b.cityName > a.cityName ? -1 : 0
               )
-              .map(({ cityName, cityPic, _id }) => {
-                return (
-                  <Link to={`/city/${_id}`} key={uuidv4()}>
-                    <div className="card">
-                      <div
-                        className="cityImage"
-                        style={{
-                          backgroundImage: `url(${cityPic})`,
-                        }}
-                      >
-                        <div className="cityName">{cityName}</div>
-                      </div>
-                    </div>
-                  </Link>
-                );
+              .map((city) => {
+                return <CityCard key={uuidv4()} cityCard={city} />;
               })
           ) : (
             <div className="noCities">

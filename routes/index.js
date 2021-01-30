@@ -16,6 +16,6 @@ router
   .get(itineraryController.allItineraries) // obtengo todos los itinerarios
   .post(itineraryController.addItinerary); // agrego un itinerario
 
-router.route("/itineraries/:id").get(itineraryController.findItineraryById);
+router.route("/itineraries/:id").get(itineraryController.findItineraryById); // encuentro itinerarios de una ciudad
 
 module.exports = router;
