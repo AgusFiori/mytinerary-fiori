@@ -25,7 +25,7 @@ const Nav = styled.nav`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+    width: 95%;
   }
 `;
 
@@ -52,6 +52,9 @@ const Navbar = () => {
                 </NavLink>
                 <NavLink to="/cities">
                   <span className="link">Cities</span>
+                </NavLink>
+                <NavLink to="/admin">
+                  <span className="link">Admin</span>
                 </NavLink>
               </div>
             </span>

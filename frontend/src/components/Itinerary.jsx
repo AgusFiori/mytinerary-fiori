@@ -3,7 +3,7 @@ import "../styles/itinerary.css";
 import { Comment } from "./Comment.jsx";
 import { Activity } from "./Activity.jsx";
 import { RiWheelchairFill, RiWheelchairLine } from "react-icons/ri";
-import { HiCash } from "react-icons/hi";
+import { HiCash, HiOutlineCash } from "react-icons/hi";
 import { v4 as uuidv4 } from "uuid";
 import { AiOutlineHeart, AiOutlineSend } from "react-icons/ai";
 
@@ -30,6 +30,20 @@ export const Itinerary = ({ itinerary }) => {
               <span>Duration: {itinerary.duration}h</span>
               <span style={{ color: "green" }}>
                 {Array(itinerary.budget).fill(<HiCash />)}
+                {(() => {
+                  switch (itinerary.budget) {
+                    case 4:
+                      return <span>{Array(1).fill(<HiOutlineCash />)}</span>;
+                    case 3:
+                      return <span>{Array(2).fill(<HiOutlineCash />)}</span>;
+                    case 2:
+                      return <span>{Array(3).fill(<HiOutlineCash />)}</span>;
+                    case 1:
+                      return <span>{Array(4).fill(<HiOutlineCash />)}</span>;
+                    default:
+                      return <span>{Array(5).fill(<HiOutlineCash />)}</span>;
+                  }
+                })()}
               </span>
               <span>
                 {itinerary.accesibility ? (

@@ -8,12 +8,6 @@ import { CityCard } from "./CityCard";
 import citiesActions from "../redux/actions/citiesActions";
 
 const Cities = (props) => {
-  // const [loading, setLoading] = useState(true);
-
-  console.log(props);
-
-  // const {getCities} = props
-
   useEffect(() => {
     props.getCities();
     window.scrollTo(0, 0);

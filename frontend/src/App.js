@@ -5,6 +5,7 @@ import { Section } from "./components/Section.jsx";
 import Cities from "./components/Cities.jsx";
 import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 import City from "./components/City.jsx";
+import { Admin } from "./components/Admin.jsx";
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
         <Navbar />
         <Switch>
           <Route exact path="/" component={Section} />
+          <Route path="/admin" component={Admin} />
           <Route path="/cities" component={Cities} />
           <Route path="/city/:id" component={City} />
           <Redirect to="/"></Redirect>

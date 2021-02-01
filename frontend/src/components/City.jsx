@@ -11,44 +11,15 @@ const City = (props) => {
   const [ciudad, setCiudad] = useState({});
   const id = props.match.params.id;
 
-  console.log(props);
-
-  // useEffect(() => {
-  // //   fetch(`http://localhost:4000/city/${id}`)
-  // //     .then((respuesta) => respuesta.json())
-  // //     .then((data) => {
-  // //       if (data.success === true) {
-  // //         setCity(data.respuesta);
-  // //       } else {
-  // //         alert("Something went wrong! 🙁");
-  // //         window.location.pathname = "/cities";
-  // //       }
-  // //     })
-  // //     .catch(() => {
-  // //       console.log("error al cargar");
-  // //     });
-  // }, [id]);
-
-  // useEffect(() => {
-  //   fetch(`http://localhost:4000/itineraries/${id}`)
-  //     .then((respuesta) => respuesta.json())
-  //     .then((data) => {
-  //       if (data.success === true) {
-  //         setItineraries(data.respuesta);
-  //       }
-  //     })
-  //     .catch(() => {
-  //       console.log("error al cargar");
-  //     });
-  // }, [id]);
-
   useEffect(() => {
     const ciudad = props.ciudad.filter((ciudad) => {
       return ciudad._id === id;
     });
     setCiudad(ciudad[0]);
     props.getItineraries(id);
-  }, []);
+  }, [id]);
+
+  console.log(props.ciudad);
 
   return (
     <div className="cityContainer">

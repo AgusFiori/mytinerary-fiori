@@ -18,7 +18,7 @@ function cityReducer(state = initialState, action) {
           return (
             city.cityName
               .toLowerCase()
-              .indexOf(action.payload.toLowerCase()) === 0
+              .indexOf(action.payload.trim().toLowerCase()) === 0
           );
         }),
       };
