@@ -1,6 +1,7 @@
 const initialState = {
   cities: [],
   filteredCities: [],
+  city: [],
 };
 
 function cityReducer(state = initialState, action) {
@@ -21,6 +22,11 @@ function cityReducer(state = initialState, action) {
               .indexOf(action.payload.trim().toLowerCase()) === 0
           );
         }),
+      };
+    case "GET_CITY":
+      return {
+        ...state,
+        city: action.payload,
       };
     default:
       return state;

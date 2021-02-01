@@ -14,6 +14,18 @@ const citiesActions = {
     };
   },
 
+  getCity: (id) => {
+    return async (dispatch, getState) => {
+      const respuesta = await axios.get(`http://127.0.0.1:4000/city/${id}`);
+      const city = respuesta.data.respuesta;
+
+      dispatch({
+        type: "GET_CITY",
+        payload: city,
+      });
+    };
+  },
+
   filterCities: (filter) => {
     return async (dispatch, getState) => {
       dispatch({

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "../styles/city.css";
 import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
@@ -6,20 +6,20 @@ import { Itinerary } from "./Itinerary";
 import { v4 as uuidv4 } from "uuid";
 import { connect } from "react-redux";
 import itinerariesActions from "../redux/actions/itinerariesActions";
+import citiesActions from "../redux/actions/citiesActions";
 
 const City = (props) => {
-  const [ciudad, setCiudad] = useState({});
   const id = props.match.params.id;
+  const { country, cityPic, cityName, flagUrl, facts } = props.city;
 
   useEffect(() => {
-    const ciudad = props.ciudad.filter((ciudad) => {
-      return ciudad._id === id;
-    });
-    setCiudad(ciudad[0]);
-    props.getItineraries(id);
-  }, [id]);
+    fetchData();
+  }, []);
 
-  console.log(props.ciudad);
+  async function fetchData() {
+    await props.getItineraries(id);
+    await props.getCity(id);
+  }
 
   return (
     <div className="cityContainer">
@@ -27,10 +27,10 @@ const City = (props) => {
         <div
           className="hero"
           style={{
-            backgroundImage: `url(${ciudad.cityPic})`,
+            backgroundImage: `url(${cityPic})`,
           }}
         >
-          <span>{ciudad.cityName}</span>
+          <span>{cityName}</span>
         </div>
       </div>
       <div className="belowImage">
@@ -40,19 +40,17 @@ const City = (props) => {
             <span
               className="countryName"
               style={{
-                backgroundImage: `url(${ciudad.flagUrl})`,
+                backgroundImage: `url(${flagUrl})`,
               }}
             >
-              {ciudad.country}
+              {country}
             </span>
           </div>
           <div className="ffacts">
             <h3>Fun facts:</h3>
             <ul>
-              {ciudad.facts
-                ? ciudad.facts.map((element) => (
-                    <li key={uuidv4()}>{element}</li>
-                  ))
+              {facts
+                ? facts.map((element) => <li key={uuidv4()}>{element}</li>)
                 : ""}
             </ul>
           </div>
@@ -85,12 +83,14 @@ const City = (props) => {
 const mapStateToProps = (state) => {
   return {
     allItineraries: state.itineraryR.itineraries,
-    ciudad: state.cityR.cities,
+    cities: state.cityR.cities,
+    city: state.cityR.city,
   };
 };
 
 const mapDispatchToProps = {
   getItineraries: itinerariesActions.getItineraries,
+  getCity: citiesActions.getCity,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(City);

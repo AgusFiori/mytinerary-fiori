@@ -6,9 +6,14 @@ import { RiWheelchairFill, RiWheelchairLine } from "react-icons/ri";
 import { HiCash, HiOutlineCash } from "react-icons/hi";
 import { v4 as uuidv4 } from "uuid";
 import { AiOutlineHeart, AiOutlineSend } from "react-icons/ai";
+import { useEffect } from "react";
 
 export const Itinerary = ({ itinerary }) => {
   const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="container">
@@ -28,7 +33,7 @@ export const Itinerary = ({ itinerary }) => {
                 {" " + itinerary.likes}
               </span>
               <span>Duration: {itinerary.duration}h</span>
-              <span style={{ color: "green" }}>
+              <span style={{ color: "darkgreen" }}>
                 {Array(itinerary.budget).fill(<HiCash />)}
                 {(() => {
                   switch (itinerary.budget) {
@@ -78,8 +83,12 @@ export const Itinerary = ({ itinerary }) => {
                 })}
               </div>
               <div className="commentInput">
-                <input type="text" />
-                <button className="ingresarComentario">
+                <input
+                  type="text"
+                  placeholder="Must be logged in to comment!"
+                  disabled
+                />
+                <button className="ingresarComentario" disabled>
                   <AiOutlineSend />
                 </button>
               </div>

@@ -40,7 +40,7 @@ const Navbar = () => {
               <div className="logoGreet">
                 <img
                   className="userIcon"
-                  src="./images/user-icon-male.jpg"
+                  src="https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg"
                   alt="logo"
                   height="100px"
                 />
