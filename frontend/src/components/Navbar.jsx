@@ -6,11 +6,12 @@ import "../styles/header.css";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
 import { connect } from "react-redux";
 import authActions from "../redux/actions/authActions";
+import { PromiseProvider } from "mongoose";
 
 const Nav = styled.nav`
   padding: 0 0 0.3rem 0;
   .logo {
-    padding: 0.3rem 0 0 3rem;
+    padding: 0.3rem 0 0 1rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -19,16 +20,18 @@ const Nav = styled.nav`
   }
   .userIcon {
     border-radius: 50%;
-    border: 3px solid black;
     margin-right: 1rem;
+    background-position: center;
+    background-size: cover;
+    height: 8rem !important;
+    width: 12rem !important;
   }
   .greeting {
-    margin-left: 1rem;
     font-size: 32px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 95%;
+    width: 100%;
   }
 `;
 
@@ -62,6 +65,23 @@ const Navbar = (props) => {
         </NavLink>
       </>
     );
+  }
+
+  if (props.loggedUser !== null) {
+    var divStyle = {
+      backgroundImage: "url(" + props.loggedUser.urlPic + ")",
+      height: "100px",
+      width: "100px",
+    };
+  } else {
+    var divStyle = {
+      backgroundImage:
+        "url(" +
+        "https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg" +
+        ")",
+      height: "100px",
+      width: "100px",
+    };
   }
 
   return (
@@ -101,19 +121,13 @@ const Navbar = (props) => {
         <div className="logo">
           <div className="logoC">
             <span id="greeting" className="greeting">
-              {/* <Link to="/login"> */}
               <div className="logoGreet" onClick={toggle}>
-                <img
-                  className="userIcon"
-                  src="https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg"
-                  alt="logo"
-                  height="100px"
-                />
+                <div className="userIcon" style={divStyle}></div>
                 <div className="greeting">
-                  Welcome, <span>Guest</span> !
+                  Welcome,{" "}
+                  {props.loggedUser ? props.loggedUser.firstname : "Guest"} !
                 </div>
               </div>
-              {/* </Link> */}
               <div className="links">
                 <NavLink to="/">
                   <span className="link">Home</span>

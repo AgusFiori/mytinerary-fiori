@@ -3,6 +3,7 @@ const router = express.Router();
 const cityController = require("../controllers/cityController");
 const itineraryController = require("../controllers/itineraryController");
 const userController = require("../controllers/userController");
+const validator = require("../controllers/validator");
 
 // rutas
 router

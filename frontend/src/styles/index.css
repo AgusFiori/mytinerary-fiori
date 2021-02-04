@@ -76,9 +76,7 @@ p.titulo {
 
 .links {
   display: flex;
-  width: 30rem;
   justify-content: space-around;
-  margin-right: 3rem;
   align-items: center;
 }
 

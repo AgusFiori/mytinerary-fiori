@@ -55,7 +55,6 @@ const userController = {
   login: async (req, res) => {
     const errores = [];
     const { username, password } = req.body;
-    console.log("hola");
     const userExists = await User.findOne({ username: username });
     if (!userExists) {
       return res.json({
