@@ -1,0 +1,78 @@
+.registryContainer {
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.formTitle {
+  display: flex;
+  justify-content: center;
+  font-family: "Pacifico", cursive;
+  text-align: center;
+  margin: 0 0 3rem 0;
+}
+
+.formTitle > h2 {
+  font-size: 64px;
+}
+
+.formContainer {
+  width: 70%;
+}
+
+.formContainer > form {
+  background-color: #03254e;
+  padding: 1rem 1.3rem 3rem 1.3rem;
+  border-radius: 21px;
+}
+
+.formContainer > form > input {
+  padding: 1rem;
+  margin: 1rem 0;
+  font-size: 32px;
+  background-color: #03254e;
+  color: white;
+}
+
+input.form-control {
+  margin: 1.5rem 0;
+  font-size: 24px;
+  font-weight: bolder;
+  color: black !important;
+}
+
+.formContainer > form > input::placeholder {
+  font-family: "Pacifico", cursive;
+  font-size: 32px;
+  color: rgb(221, 221, 221);
+}
+
+.formContainer > form > select {
+  margin: 1rem 0;
+  width: 100%;
+}
+
+.formHelp {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.createBtn {
+  padding: 0.3rem 0;
+  display: flex;
+  justify-content: center;
+}
+
+.createBtn > button {
+  background-color: #0090c1;
+}
+
+.createBtn > button:hover {
+  background-color: #00749b;
+}
+
+.erroresContainer {
+  height: 5rem;
+}

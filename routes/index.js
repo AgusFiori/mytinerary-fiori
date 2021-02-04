@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const cityController = require("../controllers/cityController");
 const itineraryController = require("../controllers/itineraryController");
+const userController = require("../controllers/userController");
 
 // rutas
 router
@@ -17,5 +18,9 @@ router
   .post(itineraryController.addItinerary); // agrego un itinerario
 
 router.route("/itineraries/:id").get(itineraryController.findItineraryById); // encuentro itinerarios de una ciudad
+
+router.route("/register").post(userController.register);
+
+router.route("/login").post(userController.login);
 
 module.exports = router;

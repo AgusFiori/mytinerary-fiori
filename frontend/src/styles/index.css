@@ -76,7 +76,7 @@ p.titulo {
 
 .links {
   display: flex;
-  width: 12rem;
+  width: 30rem;
   justify-content: space-around;
   margin-right: 3rem;
   align-items: center;
@@ -92,6 +92,15 @@ p.titulo {
   display: flex;
   align-items: center;
   cursor: pointer;
+}
+
+.greeting {
+  color: black;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.404);
+}
+
+.modal-open {
+  padding-right: 0 !important;
 }
 
 .link {
