@@ -4,6 +4,8 @@ const cityController = require("../controllers/cityController");
 const itineraryController = require("../controllers/itineraryController");
 const userController = require("../controllers/userController");
 const validator = require("../controllers/validator");
+const passport = require("passport");
+require("../config/passport");
 
 // rutas
 router
@@ -20,7 +22,9 @@ router
 
 router.route("/itineraries/:id").get(itineraryController.findItineraryById); // encuentro itinerarios de una ciudad
 
-router.route("/register").post(userController.register);
+router
+  .route("/register")
+  .post(validator.newUserValidation, userController.register);
 
 router.route("/login").post(userController.login);
 

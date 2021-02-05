@@ -123,6 +123,11 @@ p.titulo {
 .bm-burger-button {
   display: none;
 }
+
+.swal2-shown.swal2-height-auto {
+  padding: 0 !important;
+}
+
 @media (max-width: 700px) {
   .logo {
     padding: 0.3rem 0 !important;

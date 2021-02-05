@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const bcryptjs = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const userController = {
   register: async (req, res) => {
@@ -19,7 +20,6 @@ const userController = {
 
     const userExists = await User.findOne({ username: username });
     const emailExists = await User.findOne({ email: email });
-    if (confirmation !== password) errores.push("Passwords don't match");
     if (userExists) {
       errores.push("Username already exists");
     }
@@ -42,13 +42,18 @@ const userController = {
         date,
       });
       var newSavedUser = await newUser.save();
+      var token = jwt.sign({ ...newSavedUser }, process.env.SECRET_KEY, {});
     }
-    // console.log(errores);
 
     return res.json({
       success: errores.length ? false : true,
       errores: errores,
-      respuesta: newSavedUser,
+      respuesta: !errores.length && {
+        token,
+        firstname: newSavedUser.firstname,
+        urlPic: newSavedUser.urlPic,
+        username: newSavedUser.username,
+      },
     });
   },
 
@@ -68,8 +73,17 @@ const userController = {
         success: false,
         msg: "Username or password does not match",
       });
+    var token = jwt.sign({ ...userExists }, process.env.SECRET_KEY, {});
 
-    return res.json({ success: true, respuesta: userExists });
+    return res.json({
+      success: true,
+      respuesta: {
+        token,
+        firstname: userExists.firstname,
+        urlPic: userExists.urlPic,
+        username: userExists.username,
+      },
+    });
   },
 };
 

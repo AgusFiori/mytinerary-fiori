@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { Form, FormGroup, Input } from "reactstrap";
 import { connect } from "react-redux";
 import authActions from "../redux/actions/authActions";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import GoogleLogin from "react-google-login";
 
 const Login = (props) => {
   const [userToLog, setUserToLog] = useState({});
@@ -19,6 +21,18 @@ const Login = (props) => {
     });
   };
 
+  const loginSuccessToast = Swal.mixin({
+    toast: true,
+    position: "bottom-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -31,10 +45,34 @@ const Login = (props) => {
     }
     const respuesta = await props.login(userToLog);
     if (respuesta && !respuesta.success) {
-      console.log(respuesta);
       setErrors(respuesta.msg);
     } else {
-      alert("Welcome !");
+      loginSuccessToast.fire({
+        icon: "success",
+        title: "Signed in successfully",
+      });
+    }
+  };
+
+  const responseGoogle = async (response) => {
+    const respuesta = await props.login({
+      username: response.profileObj.givenName,
+      password: response.profileObj.googleId,
+    });
+
+    if (respuesta && !respuesta.success) {
+      Swal.fire({
+        title: "Oops!",
+        text: "Looks like there are no accounts linked to this Google account.",
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
+      return false;
+    } else {
+      loginSuccessToast.fire({
+        icon: "success",
+        title: "Signed in successfully",
+      });
     }
   };
 
@@ -67,8 +105,17 @@ const Login = (props) => {
             </Link>
             <span style={{ color: "white" }}>Forgot your password?</span>
           </div>
-          <div className="createBtn">
-            <button onClick={login}>Login</button>
+          <div className="createBtns">
+            <div className="buttons">
+              <button onClick={login}>Login</button>
+              <GoogleLogin
+                clientId="291388980311-dvqchmdp4eg6hd5vgm0r712qjvkpp6ud.apps.googleusercontent.com"
+                buttonText="Login with Google"
+                onSuccess={responseGoogle}
+                onFailure={responseGoogle}
+                cookiePolicy={"single_host_origin"}
+              />
+            </div>
           </div>
         </Form>
         <div className="erroresContainer">

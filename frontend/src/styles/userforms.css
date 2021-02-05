@@ -59,20 +59,45 @@ input.form-control {
   justify-content: space-between;
 }
 
-.createBtn {
+.createBtns {
   padding: 0.3rem 0;
   display: flex;
   justify-content: center;
 }
 
-.createBtn > button {
+.createBtns > .buttons > button {
   background-color: #0090c1;
 }
 
-.createBtn > button:hover {
+.createBtns > .buttons > button:hover {
   background-color: #00749b;
 }
 
 .erroresContainer {
   height: 5rem;
+}
+
+.createBtns {
+  display: flex;
+  justify-content: center;
+}
+
+.buttons {
+  display: flex;
+  width: 50%;
+  flex-direction: column;
+}
+
+.buttons > button {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.errorC {
+  display: flex;
+  justify-content: center;
+  text-align: center;
 }

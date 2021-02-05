@@ -9,6 +9,7 @@ import { Admin } from "./components/Admin.jsx";
 import Login from "./components/Login.jsx";
 import Register from "./components/Register.jsx";
 import { connect } from "react-redux";
+import authActions from "./redux/actions/authActions.js";
 
 function App(props) {
   if (props.loggedUser) {
@@ -20,6 +21,12 @@ function App(props) {
         <Route path="/city/:id" component={City} />
         <Redirect to="/"></Redirect>
       </Switch>
+    );
+  } else if (localStorage.getItem("token")) {
+    props.logFromLS(
+      localStorage.getItem("firstname"),
+      localStorage.getItem("urlPic"),
+      localStorage.getItem("token")
     );
   } else {
     var routes = (
@@ -51,4 +58,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = {
+  logFromLS: authActions.logFromLS,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

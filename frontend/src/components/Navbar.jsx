@@ -6,7 +6,6 @@ import "../styles/header.css";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
 import { connect } from "react-redux";
 import authActions from "../redux/actions/authActions";
-import { PromiseProvider } from "mongoose";
 
 const Nav = styled.nav`
   padding: 0 0 0.3rem 0;
@@ -39,8 +38,6 @@ const Navbar = (props) => {
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
-
-  console.log(props);
 
   if (props.loggedUser) {
     var links = (
