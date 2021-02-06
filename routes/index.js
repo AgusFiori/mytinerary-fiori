@@ -28,4 +28,11 @@ router
 
 router.route("/login").post(userController.login);
 
+router
+  .route("/localstorage")
+  .post(
+    passport.authenticate("jwt", { session: false }),
+    userController.logFromLS
+  );
+
 module.exports = router;

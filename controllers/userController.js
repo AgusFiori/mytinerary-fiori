@@ -85,6 +85,18 @@ const userController = {
       },
     });
   },
+
+  logFromLS: async (req, res) => {
+    res.json({
+      success: true,
+      respuesta: {
+        token: req.body.token,
+        firstname: req.user.firstname,
+        urlPic: req.user.urlPic,
+        username: req.user.username,
+      },
+    });
+  },
 };
 
 module.exports = userController;

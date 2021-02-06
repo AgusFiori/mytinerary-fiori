@@ -52,14 +52,31 @@ const authActions = {
       });
     };
   },
-  logFromLS: (firstname, urlPic, token) => {
-    return (dispatch, getState) => {
-      dispatch({
-        type: "LOG_USER",
-        payload: {
-          respuesta: { firstname: firstname, urlPic: urlPic, token: token },
-        },
-      });
+  logFromLS: (token) => {
+    return async (dispatch, getState) => {
+      try {
+        const respuesta = await axios.post(
+          "http://localhost:4000/localstorage",
+          { token },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        dispatch({
+          type: "LOG_USER",
+          payload: {
+            respuesta: { ...respuesta.data.respuesta },
+          },
+        });
+      } catch (error) {
+        if (error.respuesta.status === 401) {
+          alert("Unauthorization error");
+          localStorage.clear();
+        }
+      }
     };
   },
 };
