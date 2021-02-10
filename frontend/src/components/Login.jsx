@@ -12,6 +12,9 @@ const Login = (props) => {
   const [errors, setErrors] = useState([]);
   const { username, password } = userToLog;
 
+  console.log(props);
+
+  // funcion  que lee input y lo guarda en un objeto
   const leerInput = (e) => {
     const value = e.target.value;
     const name = e.target.name;
@@ -21,9 +24,10 @@ const Login = (props) => {
     });
   };
 
+  // tostadita de login exitoso
   const loginSuccessToast = Swal.mixin({
     toast: true,
-    position: "bottom-end",
+    position: "bottom",
     showConfirmButton: false,
     timer: 3000,
     timerProgressBar: true,
@@ -32,15 +36,31 @@ const Login = (props) => {
       toast.addEventListener("mouseleave", Swal.resumeTimer);
     },
   });
-
+  // tostadita de que faltan llenar campos
+  const missingFields = Swal.mixin({
+    toast: true,
+    position: "bottom",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
+  // scrollea hasta arriba al montar componente
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  // funcion que evalua errores y despacha accion
   const login = async (e) => {
     e.preventDefault();
     if (!username || !password) {
-      alert("Some fields are missing");
+      missingFields.fire({
+        icon: "error",
+        title: "There are some fields missing",
+      });
       return false;
     }
     const respuesta = await props.login(userToLog);
@@ -54,16 +74,16 @@ const Login = (props) => {
     }
   };
 
+  // funcion que captura datos del login con google, evalua errores y despacha accion
   const responseGoogle = async (response) => {
     const respuesta = await props.login({
-      username: response.profileObj.givenName,
+      username: response.profileObj.email,
       password: response.profileObj.googleId,
     });
-
     if (respuesta && !respuesta.success) {
       Swal.fire({
         title: "Oops!",
-        text: "Looks like there are no accounts linked to this Google account.",
+        text: "Looks like there are no users linked to this Google account.",
         icon: "error",
         confirmButtonText: "Ok",
       });

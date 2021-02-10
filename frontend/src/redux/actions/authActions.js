@@ -44,6 +44,12 @@ const authActions = {
     return async (dispatch, getState) => {
       const respuesta = await axios.post("http://localhost:4000/login", user);
       if (!respuesta.data.success) {
+        Swal.fire({
+          title: `Oops!`,
+          text: `${respuesta.data.msg}.`,
+          icon: "error",
+          confirmButtonText: "Ok",
+        });
         return respuesta.data;
       }
       dispatch({
@@ -72,9 +78,15 @@ const authActions = {
           },
         });
       } catch (error) {
-        if (error.respuesta.status === 401) {
-          alert("Unauthorization error");
+        if (error.response.status === 401) {
+          Swal.fire({
+            title: `Oops!`,
+            text: "An error has occurred.",
+            icon: "error",
+            confirmButtonText: "Ok",
+          });
           localStorage.clear();
+          return "/";
         }
       }
     };

@@ -98,6 +98,7 @@ button:hover {
 
 .comments {
   margin: 2rem 0;
+  padding: 1rem 0;
   border-top: 3px solid #78c0b3;
 }
 
@@ -123,6 +124,7 @@ button:hover {
 
 input::placeholder {
   font-size: 24px;
+  text-align: left;
 }
 
 .ingresarComentario {

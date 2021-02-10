@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "../styles/city.css";
 import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
-import { Itinerary } from "./Itinerary";
+import Itinerary from "./Itinerary";
 import { v4 as uuidv4 } from "uuid";
 import { connect } from "react-redux";
 import itinerariesActions from "../redux/actions/itinerariesActions";

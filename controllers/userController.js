@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const Itinerary = require("../models/Itinerary");
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -58,7 +59,6 @@ const userController = {
   },
 
   login: async (req, res) => {
-    const errores = [];
     const { username, password } = req.body;
     const userExists = await User.findOne({ username: username });
     if (!userExists) {
@@ -85,7 +85,7 @@ const userController = {
       },
     });
   },
-
+  // loguearse desde el local storage, para que al recargar no se pierda la informacion
   logFromLS: async (req, res) => {
     res.json({
       success: true,
@@ -96,6 +96,35 @@ const userController = {
         username: req.user.username,
       },
     });
+  },
+
+  postComment: async (req, res) => {
+    try {
+      await Itinerary.findOneAndUpdate(
+        { _id: req.params.id },
+
+        {
+          $push: {
+            comments: {
+              avatar: req.body.urlPic,
+              username: req.body.firstname,
+              comment: req.body.comment,
+            },
+          },
+        },
+        { safe: true, upsert: true, new: true }
+      );
+
+      res.json({
+        success: true,
+        respuesta: "Comentario grabado",
+      });
+    } catch (error) {
+      res.json({
+        success: false,
+        respuesta: error,
+      });
+    }
   },
 };
 

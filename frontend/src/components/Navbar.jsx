@@ -3,7 +3,6 @@ import styled from "styled-components";
 import BurgerMenu from "./BurgerMenu.jsx";
 import { NavLink } from "react-router-dom";
 import "../styles/header.css";
-import { Modal, ModalHeader, ModalBody } from "reactstrap";
 import { connect } from "react-redux";
 import authActions from "../redux/actions/authActions";
 
@@ -83,36 +82,6 @@ const Navbar = (props) => {
 
   return (
     <Nav>
-      {/* ## modal ## */}
-      <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle}>Modal title</ModalHeader>
-        <ModalBody>
-          <form className="modal-login">
-            <input
-              className="modal-input username"
-              type="text"
-              name="username"
-              placeholder="Username"
-            />
-            <input
-              className="modal-input password"
-              type="password"
-              name="password"
-              placeholder="Password"
-            />
-            {/* <input type="submit" value="Submit" /> */}
-            <button className="modal-login">Login</button>
-          </form>
-        </ModalBody>
-        {/* <ModalFooter>
-          <Button color="primary">Do Something</Button>{" "}
-          <Button color="secondary" onClick={toggle}>
-            Cancel
-          </Button>
-        </ModalFooter> */}
-      </Modal>
-      {/* ## modal end ## */}
-
       <div className="ost-multi-header">
         <BurgerMenu />
         <div className="logo">

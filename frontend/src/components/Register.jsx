@@ -121,7 +121,7 @@ const Register = (props) => {
       });
     } else {
       const respuesta = await props.signUp({
-        username: response.profileObj.givenName,
+        username: response.profileObj.email,
         password: response.profileObj.googleId,
         confirmation: response.profileObj.googleId,
         email: response.profileObj.email,

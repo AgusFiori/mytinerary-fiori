@@ -24,9 +24,16 @@ router.route("/itineraries/:id").get(itineraryController.findItineraryById); // 
 
 router
   .route("/register")
-  .post(validator.newUserValidation, userController.register);
+  .post(validator.newUserValidation, userController.register); // registrar un nuevo usuario, validado 1ro x JOI
 
-router.route("/login").post(userController.login);
+router.route("/login").post(userController.login); // loguear un usuario
+
+router
+  .route("/itinerary/:id")
+  .post(
+    passport.authenticate("jwt", { session: false }),
+    userController.postComment
+  );
 
 router
   .route("/localstorage")

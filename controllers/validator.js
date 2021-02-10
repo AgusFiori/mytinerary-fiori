@@ -3,16 +3,10 @@ const Joi = require("joi");
 const validator = {
   newUserValidation: (req, res, next) => {
     const schema = Joi.object({
-      username: Joi.string()
-        .trim()
-        .required()
-        .alphanum()
-        .min(3)
-        .max(12)
-        .messages({
-          "string.min": "Username must have at least 3 characters!",
-          "string.max": "Username must contain less than 12 characters",
-        }),
+      username: Joi.string().trim().required().min(3).max(30).messages({
+        "string.min": "Username must have at least 3 characters!",
+        "string.max": "Username must contain less than 30 characters",
+      }),
       password: Joi.string()
         .min(6)
         .required()

@@ -1,42 +1,97 @@
 import React, { useState } from "react";
 import "../styles/itinerary.css";
-import { Comment } from "./Comment.jsx";
+import Comment from "./Comment.jsx";
 import { Activity } from "./Activity.jsx";
 import { RiWheelchairFill, RiWheelchairLine } from "react-icons/ri";
 import { HiCash, HiOutlineCash } from "react-icons/hi";
 import { v4 as uuidv4 } from "uuid";
 import { AiOutlineHeart, AiOutlineSend } from "react-icons/ai";
 import { useEffect } from "react";
+import { connect } from "react-redux";
+import userActions from "../redux/actions/userActions";
+import Swal from "sweetalert2";
+import itinerariesActions from "../redux/actions/itinerariesActions";
 
-export const Itinerary = ({ itinerary }) => {
+const Itinerary = (props) => {
   const [visible, setVisible] = useState(false);
+  const [comment, setComment] = useState("");
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  const leerInput = (e) => {
+    const comment = e.target.value;
+    setComment(comment);
+  };
+
+  const postComment = async () => {
+    if (props.loggedUser) {
+      if (comment) {
+        const respuesta = await props.postComment(
+          props.loggedUser.token,
+          comment,
+          props.itinerary._id,
+          props.loggedUser.firstname,
+          props.loggedUser.urlPic,
+          props.itinerary.cityId
+        );
+        // setComment("");
+
+        // const id = props.itinerary._id;
+        // props.getComments(id);
+      } else {
+        Swal.fire({
+          title: `Oops!`,
+          text: "Comment must not be empty!",
+          icon: "error",
+          confirmButtonText: "Ok",
+        });
+      }
+    } else {
+      Swal.fire({
+        title: `Oops!`,
+        text: "You must be logged in to comment",
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
+    }
+  };
+
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, []);
 
   return (
     <div className="container">
-      <div className="itinerary" key={itinerary._id}>
+      <div className="itinerary" key={props.itinerary._id}>
         <div className="itineraryTitle">
-          <h3>{itinerary.title}</h3>
+          <h3>{props.itinerary.title}</h3>
         </div>
         <div className="content">
           <div className="author">
-            <img src="../images/user-icon-male.jpg" alt="avatar" />
-            <span>{itinerary.authorName}</span>
+            <div
+              style={{
+                backgroundImage: "url(" + props.itinerary.authorPic + ")",
+                height: "150px",
+                width: "150px",
+                backgroundPosition: "center",
+                backgroundSize: "cover",
+                borderRadius: "50%",
+              }}
+            ></div>
+            {/* <img src="../images/user-icon-male.jpg" alt="avatar" /> */}
+            <span>{props.itinerary.authorName}</span>
           </div>
           <div className="info">
             <div className="ratings">
               <span>
                 <AiOutlineHeart />
-                {" " + itinerary.likes}
+                {" " + props.itinerary.likes}
               </span>
-              <span>Duration: {itinerary.duration}h</span>
+              <span>Duration: {props.itinerary.duration}h</span>
               <span style={{ color: "darkgreen" }}>
-                {Array(itinerary.budget).fill(<HiCash />)}
+                {Array(props.itinerary.budget).fill(<HiCash />)}
                 {(() => {
-                  switch (itinerary.budget) {
+                  switch (props.itinerary.budget) {
+                    case 5:
+                      break;
                     case 4:
                       return <span>{Array(1).fill(<HiOutlineCash />)}</span>;
                     case 3:
@@ -51,7 +106,7 @@ export const Itinerary = ({ itinerary }) => {
                 })()}
               </span>
               <span>
-                {itinerary.accesibility ? (
+                {props.itinerary.accesibility ? (
                   <RiWheelchairFill />
                 ) : (
                   <RiWheelchairLine />
@@ -59,7 +114,7 @@ export const Itinerary = ({ itinerary }) => {
               </span>
             </div>
             <div className="hashtags">
-              {itinerary.hashtags.map((hashtag) => {
+              {props.itinerary.hashtags.map((hashtag) => {
                 return (
                   <span style={{ fontSize: "18px" }} key={uuidv4()}>
                     #{hashtag}
@@ -73,23 +128,24 @@ export const Itinerary = ({ itinerary }) => {
           {visible && (
             <>
               <div className="activities">
-                {itinerary.activities.map((activity) => {
+                {props.itinerary.activities.map((activity) => {
                   return <Activity key={uuidv4()} activity={activity} />;
                 })}
               </div>
               <div className="comments">
-                {itinerary.comments.map((comment) => {
+                {props.itinerary.comments.map((comment) => {
                   return <Comment key={uuidv4()} comment={comment} />;
                 })}
               </div>
               <div className="commentInput">
                 <input
                   type="text"
-                  placeholder="Must be logged in to comment!"
-                  disabled
+                  placeholder="Write down a comment..."
+                  value={comment}
+                  onChange={leerInput}
                 />
-                <button className="ingresarComentario" disabled>
-                  <AiOutlineSend />
+                <button className="ingresarComentario">
+                  <AiOutlineSend onClick={() => postComment()} />
                 </button>
               </div>
             </>
@@ -104,3 +160,17 @@ export const Itinerary = ({ itinerary }) => {
     </div>
   );
 };
+
+const mapStateToProps = (state) => {
+  return {
+    loggedUser: state.authR.loggedUser,
+  };
+};
+
+const mapDispatchToProps = {
+  postComment: userActions.postComment,
+  getItineraries: itinerariesActions.getItineraries,
+  getComments: userActions.getComments,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Itinerary);
