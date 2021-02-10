@@ -8,6 +8,7 @@ const citiesActions = {
       const cities = respuesta.data.respuesta;
 
       dispatch({
+        // esto es la action
         type: "GET_CITIES",
         payload: cities,
       });

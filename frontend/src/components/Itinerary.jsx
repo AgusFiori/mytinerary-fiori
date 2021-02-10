@@ -5,8 +5,8 @@ import { Activity } from "./Activity.jsx";
 import { RiWheelchairFill, RiWheelchairLine } from "react-icons/ri";
 import { HiCash, HiOutlineCash } from "react-icons/hi";
 import { v4 as uuidv4 } from "uuid";
-import { AiOutlineHeart, AiOutlineSend } from "react-icons/ai";
-import { useEffect } from "react";
+import { AiOutlineHeart, AiOutlineSend, AiFillHeart } from "react-icons/ai";
+// import { useEffect } from "react";
 import { connect } from "react-redux";
 import userActions from "../redux/actions/userActions";
 import Swal from "sweetalert2";
@@ -14,28 +14,24 @@ import itinerariesActions from "../redux/actions/itinerariesActions";
 
 const Itinerary = (props) => {
   const [visible, setVisible] = useState(false);
-  const [comment, setComment] = useState("");
+  const [comment, setComment] = useState({});
 
   const leerInput = (e) => {
     const comment = e.target.value;
-    setComment(comment);
+    setComment({
+      comment: comment,
+      token: props.loggedUser.token,
+      id: props.itinerary._id,
+      name: props.loggedUser.firstname,
+      urlPic: props.loggedUser.urlPic,
+      cityId: props.itinerary.cityId._id,
+    });
   };
 
   const postComment = async () => {
     if (props.loggedUser) {
-      if (comment) {
-        const respuesta = await props.postComment(
-          props.loggedUser.token,
-          comment,
-          props.itinerary._id,
-          props.loggedUser.firstname,
-          props.loggedUser.urlPic,
-          props.itinerary.cityId
-        );
-        // setComment("");
-
-        // const id = props.itinerary._id;
-        // props.getComments(id);
+      if (comment.comment) {
+        await props.postComment(comment);
       } else {
         Swal.fire({
           title: `Oops!`,
@@ -52,6 +48,22 @@ const Itinerary = (props) => {
         confirmButtonText: "Ok",
       });
     }
+  };
+
+  const like = async () => {
+    await props.likeItinerary(
+      props.itinerary._id,
+      props.loggedUser.token,
+      props.itinerary.cityId._id
+    );
+  };
+
+  const dislike = async () => {
+    await props.dislikeItinerary(
+      props.itinerary._id,
+      props.loggedUser.token,
+      props.itinerary.cityId._id
+    );
   };
 
   // useEffect(() => {
@@ -81,10 +93,33 @@ const Itinerary = (props) => {
           </div>
           <div className="info">
             <div className="ratings">
-              <span>
+              {props.loggedUser ? (
+                props.itinerary.likes.find(
+                  (like) => like === props.loggedUser.id
+                ) ? (
+                  <span onClick={dislike}>
+                    <AiFillHeart />
+                    {" " + props.itinerary.likes.length}
+                  </span>
+                ) : (
+                  <span onClick={like}>
+                    <AiOutlineHeart />
+                    {" " + props.itinerary.likes.length}
+                  </span>
+                )
+              ) : (
+                <span onClick={() => alert("tiene q estar logueado")}>
+                  <AiOutlineHeart />
+
+                  {" " + props.itinerary.likes.length}
+                </span>
+              )}
+
+              {/* <span onClick={() => like()}>
                 <AiOutlineHeart />
                 {" " + props.itinerary.likes}
-              </span>
+              </span> */}
+
               <span>Duration: {props.itinerary.duration}h</span>
               <span style={{ color: "darkgreen" }}>
                 {Array(props.itinerary.budget).fill(<HiCash />)}
@@ -125,35 +160,42 @@ const Itinerary = (props) => {
           </div>
         </div>
         <div className="commentsContainer">
-          {visible && (
-            <>
-              <div className="activities">
-                {props.itinerary.activities.map((activity) => {
-                  return <Activity key={uuidv4()} activity={activity} />;
-                })}
-              </div>
-              <div className="comments">
-                {props.itinerary.comments.map((comment) => {
-                  return <Comment key={uuidv4()} comment={comment} />;
-                })}
-              </div>
-              <div className="commentInput">
-                <input
-                  type="text"
-                  placeholder="Write down a comment..."
-                  value={comment}
-                  onChange={leerInput}
+          {/* {visible && (
+            <> */}
+          <div className="activities">
+            {props.itinerary.activities.map((activity) => {
+              return <Activity key={uuidv4()} activity={activity} />;
+            })}
+          </div>
+          <div className="comments">
+            {props.itinerary.comments.map((comment) => {
+              return (
+                <Comment
+                  key={uuidv4()}
+                  comment={comment}
+                  id={props.itinerary._id}
+                  cityId={props.itinerary.cityId}
                 />
-                <button className="ingresarComentario">
-                  <AiOutlineSend onClick={() => postComment()} />
-                </button>
-              </div>
-            </>
-          )}
-          <div className="buttonContainer">
-            <button onClick={() => setVisible(!visible)}>
-              View {visible ? "Less" : "More"}
+              );
+            })}
+          </div>
+          <div className="commentInput">
+            <input
+              type="text"
+              placeholder="Write down a comment..."
+              value={comment.comment === "" ? "" : comment.comment}
+              onChange={leerInput}
+            />
+            <button className="ingresarComentario" onClick={postComment}>
+              <AiOutlineSend />
             </button>
+          </div>
+          {/* </>
+          )} */}
+          <div className="buttonContainer">
+            {/* <button onClick={() => setVisible(!visible)}>
+              View {visible ? "Less" : "More"}
+            </button> */}
           </div>
         </div>
       </div>
@@ -171,6 +213,8 @@ const mapDispatchToProps = {
   postComment: userActions.postComment,
   getItineraries: itinerariesActions.getItineraries,
   getComments: userActions.getComments,
+  likeItinerary: userActions.likeItinerary,
+  dislikeItinerary: userActions.dislikeItinerary,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Itinerary);

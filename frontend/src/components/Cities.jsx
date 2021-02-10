@@ -11,7 +11,7 @@ const Cities = (props) => {
   useEffect(() => {
     props.getCities();
     window.scrollTo(0, 0);
-  }, []);
+  }, []); // []
 
   return (
     <div className="cities">
@@ -65,6 +65,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
+  // trae la posibilidad de despachar la action
   getCities: citiesActions.getCities,
   filterCities: citiesActions.filterCities,
 };

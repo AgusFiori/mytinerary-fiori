@@ -36,6 +36,27 @@ router
   );
 
 router
+  .route("/itinerary/:itineraryId/:commentId")
+  .delete(
+    passport.authenticate("jwt", { session: false }),
+    userController.deleteComment
+  );
+
+router
+  .route("/itinerary/like/:id")
+  .post(
+    passport.authenticate("jwt", { session: false }),
+    userController.likeComment
+  );
+
+router
+  .route("/itinerary/dislike/:id")
+  .post(
+    passport.authenticate("jwt", { session: false }),
+    userController.dislikeComment
+  );
+
+router
   .route("/localstorage")
   .post(
     passport.authenticate("jwt", { session: false }),

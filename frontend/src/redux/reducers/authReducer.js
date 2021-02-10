@@ -7,6 +7,8 @@ const authReducer = (state = initialState, action) => {
       localStorage.setItem("firstname", action.payload.respuesta.firstname);
       localStorage.setItem("urlPic", action.payload.respuesta.urlPic);
       localStorage.setItem("token", action.payload.respuesta.token);
+      localStorage.setItem("id", action.payload.respuesta.id);
+
       return {
         ...state,
         loggedUser: action.payload.respuesta,

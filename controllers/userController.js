@@ -54,6 +54,7 @@ const userController = {
         firstname: newSavedUser.firstname,
         urlPic: newSavedUser.urlPic,
         username: newSavedUser.username,
+        id: newSavedUser._id,
       },
     });
   },
@@ -82,6 +83,7 @@ const userController = {
         firstname: userExists.firstname,
         urlPic: userExists.urlPic,
         username: userExists.username,
+        id: userExists._id,
       },
     });
   },
@@ -94,6 +96,7 @@ const userController = {
         firstname: req.user.firstname,
         urlPic: req.user.urlPic,
         username: req.user.username,
+        id: req.user._id,
       },
     });
   },
@@ -107,8 +110,8 @@ const userController = {
           $push: {
             comments: {
               avatar: req.body.urlPic,
-              username: req.body.firstname,
-              comment: req.body.comment,
+              username: req.body.name,
+              comment: req.body.actualComment,
             },
           },
         },
@@ -124,6 +127,67 @@ const userController = {
         success: false,
         respuesta: error,
       });
+    }
+  },
+  deleteComment: async (req, res) => {
+    try {
+      const itineraryId = req.params.itineraryId;
+      const commentId = req.params.commentId;
+      const respuesta = await Itinerary.findOneAndUpdate(
+        { _id: itineraryId },
+        {
+          $pull: {
+            comments: {
+              _id: commentId,
+            },
+          },
+        },
+        { new: true }
+      );
+      res.json({
+        success: true,
+        respuesta: "Comentario borrado",
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  likeComment: async (req, res) => {
+    console.log(req.user);
+
+    try {
+      await Itinerary.findOneAndUpdate(
+        { _id: req.params.id },
+        {
+          $addToSet: {
+            likes: req.user._id,
+          },
+        }
+      );
+      res.json({
+        success: true,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  dislikeComment: async (req, res) => {
+    console.log(req.user);
+    try {
+      await Itinerary.findOneAndUpdate(
+        { _id: req.params.id },
+        {
+          $pull: {
+            likes: req.user._id,
+          },
+        }
+      );
+      res.json({
+        success: true,
+      });
+    } catch (error) {
+      console.log(error);
     }
   },
 };

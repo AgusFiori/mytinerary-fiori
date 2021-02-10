@@ -2,11 +2,21 @@ import React, { useState } from "react";
 import "../styles/comment.css";
 import { AiOutlineCloseCircle, AiFillEdit } from "react-icons/ai";
 import { connect } from "react-redux";
-import itinerariesActions from "../redux/actions/itinerariesActions";
+import usersActions from "../redux/actions/userActions";
+// import itinerariesActions from "../redux/actions/itinerariesActions";
 
 const Comment = (props) => {
-  const [visible, setVisible] = useState(false);
-  const [edit, setEdit] = useState("");
+  // const [visible, setVisible] = useState(false);
+  // const [edit, setEdit] = useState("");
+
+  const getComment = (e) => {
+    props.deleteComment(
+      props.comment._id,
+      props.id,
+      props.loggedUser.token,
+      props.cityId._id
+    );
+  };
 
   return (
     <div className="commentContainer">
@@ -24,18 +34,24 @@ const Comment = (props) => {
         <div className="username">{props.comment.username}:</div>
         <div className="comment">{props.comment.comment}</div>
       </div>
-      {props.loggedUser.firstname === props.comment.username &&
+      {props.loggedUser &&
+        props.loggedUser.firstname === props.comment.username &&
         props.loggedUser.urlPic === props.comment.avatar && (
           <div className="actions">
             <AiFillEdit color="darkorange" style={{ cursor: "pointer" }} />
             <AiOutlineCloseCircle
               color="darkred"
               style={{ cursor: "pointer" }}
+              onClick={getComment}
             />
           </div>
         )}
     </div>
   );
+};
+
+const mapDispatchToProps = {
+  deleteComment: usersActions.deleteComment,
 };
 
 const mapStateToProps = (state) => {
@@ -44,4 +60,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Comment);
+export default connect(mapStateToProps, mapDispatchToProps)(Comment);
