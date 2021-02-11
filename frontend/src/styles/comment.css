@@ -51,3 +51,7 @@
   border-radius: 50%;
   height: 80px;
 }
+
+.edit {
+  text-align: left !important;
+}

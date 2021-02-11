@@ -12,8 +12,6 @@ const Login = (props) => {
   const [errors, setErrors] = useState([]);
   const { username, password } = userToLog;
 
-  console.log(props);
-
   // funcion  que lee input y lo guarda en un objeto
   const leerInput = (e) => {
     const value = e.target.value;

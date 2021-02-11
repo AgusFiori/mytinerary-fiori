@@ -18,6 +18,7 @@ const Cities = (props) => {
       <h1>Cities</h1>
       <h2 className="filter">
         <input
+          className="filterCities"
           type="text"
           placeholder="Search cities..."
           name="filter"

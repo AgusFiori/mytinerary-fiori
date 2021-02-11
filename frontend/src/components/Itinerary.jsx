@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/itinerary.css";
 import Comment from "./Comment.jsx";
 import { Activity } from "./Activity.jsx";
@@ -6,7 +6,6 @@ import { RiWheelchairFill, RiWheelchairLine } from "react-icons/ri";
 import { HiCash, HiOutlineCash } from "react-icons/hi";
 import { v4 as uuidv4 } from "uuid";
 import { AiOutlineHeart, AiOutlineSend, AiFillHeart } from "react-icons/ai";
-// import { useEffect } from "react";
 import { connect } from "react-redux";
 import userActions from "../redux/actions/userActions";
 import Swal from "sweetalert2";
@@ -98,7 +97,7 @@ const Itinerary = (props) => {
                   (like) => like === props.loggedUser.id
                 ) ? (
                   <span onClick={dislike}>
-                    <AiFillHeart />
+                    <AiFillHeart color="darkred" />
                     {" " + props.itinerary.likes.length}
                   </span>
                 ) : (
@@ -108,18 +107,21 @@ const Itinerary = (props) => {
                   </span>
                 )
               ) : (
-                <span onClick={() => alert("tiene q estar logueado")}>
+                <span
+                  onClick={() =>
+                    Swal.fire({
+                      title: `Oops!`,
+                      text: "You must be logged in to like itineraries",
+                      icon: "error",
+                      confirmButtonText: "Ok",
+                    })
+                  }
+                >
                   <AiOutlineHeart />
 
                   {" " + props.itinerary.likes.length}
                 </span>
               )}
-
-              {/* <span onClick={() => like()}>
-                <AiOutlineHeart />
-                {" " + props.itinerary.likes}
-              </span> */}
-
               <span>Duration: {props.itinerary.duration}h</span>
               <span style={{ color: "darkgreen" }}>
                 {Array(props.itinerary.budget).fill(<HiCash />)}
@@ -160,42 +162,42 @@ const Itinerary = (props) => {
           </div>
         </div>
         <div className="commentsContainer">
-          {/* {visible && (
-            <> */}
-          <div className="activities">
-            {props.itinerary.activities.map((activity) => {
-              return <Activity key={uuidv4()} activity={activity} />;
-            })}
-          </div>
-          <div className="comments">
-            {props.itinerary.comments.map((comment) => {
-              return (
-                <Comment
-                  key={uuidv4()}
-                  comment={comment}
-                  id={props.itinerary._id}
-                  cityId={props.itinerary.cityId}
+          {visible && (
+            <>
+              <div className="activities">
+                {props.itinerary.activities.map((activity) => {
+                  return <Activity key={uuidv4()} activity={activity} />;
+                })}
+              </div>
+              <div className="comments">
+                {props.itinerary.comments.map((comment) => {
+                  return (
+                    <Comment
+                      key={uuidv4()}
+                      comment={comment}
+                      id={props.itinerary._id}
+                      cityId={props.itinerary.cityId}
+                    />
+                  );
+                })}
+              </div>
+              <div className="commentInput">
+                <input
+                  id="commentInput"
+                  type="text"
+                  placeholder="Write down a comment..."
+                  onChange={leerInput}
                 />
-              );
-            })}
-          </div>
-          <div className="commentInput">
-            <input
-              type="text"
-              placeholder="Write down a comment..."
-              value={comment.comment === "" ? "" : comment.comment}
-              onChange={leerInput}
-            />
-            <button className="ingresarComentario" onClick={postComment}>
-              <AiOutlineSend />
-            </button>
-          </div>
-          {/* </>
-          )} */}
+                <button className="ingresarComentario" onClick={postComment}>
+                  <AiOutlineSend />
+                </button>
+              </div>
+            </>
+          )}
           <div className="buttonContainer">
-            {/* <button onClick={() => setVisible(!visible)}>
+            <button onClick={() => setVisible(!visible)}>
               View {visible ? "Less" : "More"}
-            </button> */}
+            </button>
           </div>
         </div>
       </div>

@@ -33,6 +33,10 @@ router
   .post(
     passport.authenticate("jwt", { session: false }),
     userController.postComment
+  )
+  .put(
+    passport.authenticate("jwt", { session: false }),
+    userController.editComment
   );
 
 router

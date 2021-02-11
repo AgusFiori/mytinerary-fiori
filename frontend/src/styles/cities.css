@@ -17,6 +17,10 @@
   background-repeat: no-repeat;
 }
 
+.filterCities::placeholder {
+  text-align: center !important;
+}
+
 .cityImage:hover {
   background-position: top;
   transition: 0.3s ease;

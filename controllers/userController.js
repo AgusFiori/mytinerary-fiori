@@ -149,7 +149,10 @@ const userController = {
         respuesta: "Comentario borrado",
       });
     } catch (error) {
-      console.log(error);
+      res.json({
+        success: false,
+        respuesta: error,
+      });
     }
   },
 
@@ -173,7 +176,6 @@ const userController = {
     }
   },
   dislikeComment: async (req, res) => {
-    console.log(req.user);
     try {
       await Itinerary.findOneAndUpdate(
         { _id: req.params.id },
@@ -182,6 +184,27 @@ const userController = {
             likes: req.user._id,
           },
         }
+      );
+      res.json({
+        success: true,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  editComment: async (req, res) => {
+    try {
+      await Itinerary.findOneAndUpdate(
+        {
+          _id: req.params.id,
+          "comments._id": req.body.commentToEdit.commentId,
+        },
+        {
+          $set: {
+            "comments.$.comment": req.body.commentToEdit.comment,
+          },
+        },
+        { new: true }
       );
       res.json({
         success: true,
