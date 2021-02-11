@@ -5,7 +5,16 @@ export const Activity = ({ activity }) => {
   return (
     <div className="activityContainer">
       <div className="activityPic">
-        <img src={activity.img} alt="activity" />
+        <div
+          className="activity"
+          style={{
+            backgroundImage: `url(${activity.img})`,
+            width: "300px",
+            height: "200px",
+            backgroundPosition: "cover",
+            backgroundSize: "cover",
+          }}
+        ></div>
       </div>
       <div className="activity">{activity.activity}</div>
     </div>

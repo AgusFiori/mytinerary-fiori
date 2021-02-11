@@ -80,14 +80,14 @@ button {
   outline: none !important;
   border: none;
   box-shadow: 2px 2px rgb(0, 0, 0, 0.7);
-  background-color: #e5a9a9;
+  background-color: #ff5656;
   color: white;
   font-weight: bolder;
   transition: 0.2s ease;
 }
 
 button:hover {
-  background-color: #bb8181;
+  background-color: #741a1a;
 }
 
 .hashtags {
@@ -106,6 +106,7 @@ button:hover {
   display: flex;
   margin: 3rem 0;
   justify-content: space-around;
+  padding: 0 1rem;
 }
 
 .commentInput {
@@ -135,7 +136,6 @@ input::placeholder {
   text-align: center;
   height: 3rem;
   margin: 0 1rem;
-  background-color: #e5a9a9;
   color: white;
   padding: 1.7rem 2rem;
 }

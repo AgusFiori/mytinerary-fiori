@@ -12,19 +12,29 @@ import Swal from "sweetalert2";
 import itinerariesActions from "../redux/actions/itinerariesActions";
 
 const Itinerary = (props) => {
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
   const [comment, setComment] = useState({});
 
   const leerInput = (e) => {
-    const comment = e.target.value;
-    setComment({
-      comment: comment,
-      token: props.loggedUser.token,
-      id: props.itinerary._id,
-      name: props.loggedUser.firstname,
-      urlPic: props.loggedUser.urlPic,
-      cityId: props.itinerary.cityId._id,
-    });
+    if (props.loggedUser) {
+      const comment = e.target.value;
+      setComment({
+        comment: comment.trim(),
+        token: props.loggedUser.token,
+        id: props.itinerary._id,
+        name: props.loggedUser.firstname,
+        urlPic: props.loggedUser.urlPic,
+        cityId: props.itinerary.cityId._id,
+      });
+    } else {
+      Swal.fire({
+        title: `Oops!`,
+        text: "You must be logged in to comment",
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
+      e.target.value = "";
+    }
   };
 
   const postComment = async () => {
@@ -183,7 +193,6 @@ const Itinerary = (props) => {
               </div>
               <div className="commentInput">
                 <input
-                  id="commentInput"
                   type="text"
                   placeholder="Write down a comment..."
                   onChange={leerInput}
