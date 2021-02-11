@@ -11,7 +11,7 @@ export const Activity = ({ activity }) => {
             backgroundImage: `url(${activity.img})`,
             width: "300px",
             height: "200px",
-            backgroundPosition: "cover",
+            backgroundPosition: "center",
             backgroundSize: "cover",
           }}
         ></div>

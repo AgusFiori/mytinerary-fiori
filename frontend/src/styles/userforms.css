@@ -101,3 +101,7 @@ input.form-control {
   justify-content: center;
   text-align: center;
 }
+
+input::placeholder {
+  text-align: center !important;
+}
