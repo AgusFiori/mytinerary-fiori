@@ -14,7 +14,7 @@ const Comment = (props) => {
   const leerInput = (e) => {
     const comment = e.target.value;
     setComment({
-      comment: comment,
+      comment: comment.trim(),
       token: props.loggedUser.token,
       id: props.id,
       cityId: props.cityId._id,
