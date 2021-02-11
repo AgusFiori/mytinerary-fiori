@@ -193,6 +193,7 @@ const Itinerary = (props) => {
               </div>
               <div className="commentInput">
                 <input
+                  className="commInput"
                   type="text"
                   placeholder="Write down a comment..."
                   onChange={leerInput}

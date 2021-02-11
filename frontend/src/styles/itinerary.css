@@ -139,3 +139,7 @@ input::placeholder {
   color: white;
   padding: 1.7rem 2rem;
 }
+
+.commInput::placeholder {
+  text-align: left !important;
+}
