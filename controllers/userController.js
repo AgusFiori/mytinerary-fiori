@@ -25,7 +25,7 @@ const userController = {
       errores.push("Username already exists");
     }
     if (emailExists) {
-      errores.push("Email has already been registered");
+      errores.push(" Email has already been registered");
     }
 
     if (!errores.length) {
@@ -49,6 +49,7 @@ const userController = {
     return res.json({
       success: errores.length ? false : true,
       errores: errores,
+      // tipo: errores,
       respuesta: !errores.length && {
         token,
         firstname: newSavedUser.firstname,

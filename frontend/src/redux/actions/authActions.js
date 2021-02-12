@@ -20,12 +20,14 @@ const authActions = {
         });
         return false;
       }
+      if (respuesta.data.errores) {
+        var errores = respuesta.data.errores.map((error) => error);
+      }
+
       Swal.fire({
         title: `Oops!`,
-        text: `Something went wrong! ${
-          respuesta.data.errores
-            ? "It seems there's already an account linked to your Google account"
-            : "Please check for prompted errors."
+        text: `${
+          respuesta.data.errores ? errores : "Check for prompted errors"
         }`,
         icon: "error",
         confirmButtonText: "Ok",

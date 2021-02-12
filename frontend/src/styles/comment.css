@@ -52,6 +52,10 @@
   height: 80px;
 }
 
-.edit {
+input.edit::placeholder {
   text-align: left !important;
+}
+
+input.edit {
+  text-align: left;
 }
