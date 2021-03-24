@@ -1,3 +1,7 @@
 # mytinerary-fiori
 
-run npm i in front and back
+<h2>Usage</h2>
+
+Run <code>npm install</code> in both front and back folders
+
+
